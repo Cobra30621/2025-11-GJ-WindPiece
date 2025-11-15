@@ -13,6 +13,7 @@ namespace Core.Pieces
         public int SpawnOrder { get; set; } // 用於亡語優先序
         public bool IsFalling { get; set; } = false;
         
+        [ShowInInspector]
         public PieceConfig Config { get; private set; }
  
         public void Init(PieceConfig config, Vector2Int pos)
