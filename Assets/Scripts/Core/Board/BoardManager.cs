@@ -33,6 +33,7 @@ namespace Core.Board
             }
         }
 
+
         public bool IsInside(Vector2Int p) => cells.ContainsKey(p);
         public TileCell GetCell(Vector2Int p) => cells.ContainsKey(p) ? cells[p] : null;
 
