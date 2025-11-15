@@ -16,7 +16,7 @@ namespace Core.GameFlow
     {
         public static GameManager Instance;
         public GameState CurrentState { get; private set; } = GameState.Init;
-        public BoardManager board;
+
         public WindSystem windSystem;
         public PieceAnimator animator;
         public PieceFactory pieceFactory;
@@ -98,6 +98,7 @@ namespace Core.GameFlow
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
 
+            var board = BoardManager.Instance;
             // 簡單：所有敵方棋子按 MoveDirection 嘗試移動一格（不觸發風）
             foreach (var cell in board.AllCells())
             {
@@ -124,7 +125,7 @@ namespace Core.GameFlow
         public void CheckLevelEnd()
         {
             // 簡單示例：若場上沒有 Enemy 則過關
-            foreach (var c in board.AllCells())
+            foreach (var c in BoardManager.Instance.AllCells())
                 if (c.OccupiedPiece != null && c.OccupiedPiece.PieceType == PieceType.Enemy)
                     return;
             CurrentState = GameState.Win;
