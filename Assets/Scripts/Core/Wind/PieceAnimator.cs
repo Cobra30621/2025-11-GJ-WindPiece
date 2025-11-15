@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Core.Board;
+using Core.GameFlow;
+using Core.Pieces;
 using Core.Utils;
 using UnityEngine;
 
@@ -9,10 +12,14 @@ namespace Core.Wind
     {
         // World position conversion helper
         public Transform tileOrigin;
+
+        private BoardManager board => GameManager.Instance.board;
+        
+        
         public Vector3 CellToWorld(Vector2Int p)
         {
             // 假設每格 1 單位
-            return new Vector3(p.x, p.y, 0) + (tileOrigin ? tileOrigin.position : Vector3.zero);
+            return board.GridToWorld(p);
         }
 
         // 播放 move list（每個 move 會做平滑插值）
@@ -38,6 +45,7 @@ namespace Core.Wind
                     // 簡單處理：destroy object
                     GameEventBus.OnPieceRemoved?.Invoke(m.piece);
                     Object.Destroy(m.piece.gameObject);
+                    PieceRegistry.Instance.RemovePiece(m.piece);
                 }
 
                 yield return null;

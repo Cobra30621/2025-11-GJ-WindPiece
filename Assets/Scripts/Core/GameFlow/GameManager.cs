@@ -73,13 +73,8 @@ namespace Core.GameFlow
             // windSystem.Resolve returns sequence of moves to play
             Debug.Log($"handle wind {placed}");
             moves = windSystem.ResolveWindAndGetMoves(placed);
-            
-            // moves 可直接傳給動畫系統或預覽系統
-            foreach(var move in moves)
-            {
-                move.piece.MoveToWorld(board.GridToWorld(move.to));
-            }
-            // yield return animator.PlayMoves(moves);
+         
+            yield return animator.PlayMoves(moves);
             yield return null;
 
             GameEventBus.OnWindEnd?.Invoke();

@@ -49,10 +49,11 @@ namespace Core.Wind
                 if (piece.Config.isObstacle) continue; // 障礙物不會被吹
 
                 bool inRange = false;
+                bool isFalling = false;
 
                 // 判定棋子是否在風範圍
-                if (windDir == Vector2Int.right && piece.Position.x <= origin.x) inRange = true;
-                else if (windDir == Vector2Int.left && piece.Position.x >= origin.x) inRange = true;
+                if (windDir == Vector2Int.right && piece.Position.x >= origin.x) inRange = true;
+                else if (windDir == Vector2Int.left && piece.Position.x <= origin.x) inRange = true;
                 else if (windDir == Vector2Int.up && piece.Position.y >= origin.y) inRange = true;
                 else if (windDir == Vector2Int.down && piece.Position.y <= origin.y) inRange = true;
                 
@@ -63,14 +64,22 @@ namespace Core.Wind
                 // 計算下一格位置 (一次吹一格)
                 Vector2Int targetPos = piece.Position + windDir;
                 var targetCell = board.GetCell(targetPos);
-                Debug.Log($"{piece} inrange: {inRange}, {targetCell}");
-
+         
+                
+                // 掉入洞
+                Debug.Log($"get cell {targetPos}, {board.GetCell(targetPos)}");
+                if (targetCell == null ||targetCell.OccupiedPiece != null)
+                {
+                    isFalling = true;
+                }
                 // 移動判定
-                if (targetCell == null || targetCell.Type == TileType.Obstacle || targetCell.OccupiedPiece != null)
+                else if ( targetCell.Type == TileType.Obstacle)
                 {
                     // 無法移動，跳過
                     continue;
                 }
+                
+                
 
                 // 建立移動結果
                 var moveResult = new PieceMoveResult
@@ -78,12 +87,12 @@ namespace Core.Wind
                     piece = piece,
                     from = piece.Position,
                     to = targetPos,
-                    isFalling = false
+                    isFalling = isFalling
                 };
                 moves.Add(moveResult);
 
                 // 更新棋盤狀態
-                // board.RemovePiece(piece);
+                board.RemovePiece(piece);
                 board.PlacePiece(piece, targetPos);
             }
         }

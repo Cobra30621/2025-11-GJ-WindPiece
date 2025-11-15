@@ -14,6 +14,7 @@ public class ChessInputController : MonoBehaviour
     [SerializeField]
     private PieceConfig selectedPieceConfig;
 
+    [Button]
     public void SetSelectedPiece(PieceConfig config)
     {
         selectedPieceConfig = config;
