@@ -9,7 +9,14 @@ public class ChessInputController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private Tilemap boardTilemap;
+    public Tilemap boardTilemap;
+    
+    public static ChessInputController Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {

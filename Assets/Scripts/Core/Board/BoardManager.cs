@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Core.Pieces;
 using Core.Utils;
@@ -9,6 +10,8 @@ namespace Core.Board
 {
     public class BoardManager : MonoBehaviour
     {
+        public static BoardManager Instance { get; private set; }
+        
         public Tilemap groundTilemap; // 用於視覺
         public TileTypeData tileTypeData; // 紀錄類別
         public Vector2Int size = new Vector2Int(8, 8);
@@ -20,6 +23,13 @@ namespace Core.Board
 
         void Awake()
         {
+            Instance = this;
+        }
+
+        public void GenerateBoard(Tilemap tilemap)
+        {
+            groundTilemap = tilemap;
+            
             InitializeEmptyBoard();
             ReadTilemapToDict();
         }
