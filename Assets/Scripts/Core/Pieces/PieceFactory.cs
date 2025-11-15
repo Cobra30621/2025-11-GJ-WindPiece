@@ -1,4 +1,5 @@
 using System;
+using Core.Board;
 using Core.GameFlow;
 using Core.Utils;
 using Game.Core.Pieces;
@@ -26,7 +27,7 @@ namespace Core.Pieces
         
         public Piece Spawn(GameObject prefab, PieceConfig config,  Vector2Int pos)
         {
-            var worldPos = GameManager.Instance.board.GridToWorld(pos);
+            var worldPos = BoardManager.Instance.GridToWorld(pos);
 
             var go = Object.Instantiate(prefab, spawnPieceTrans);
             go.transform.position = worldPos;
@@ -34,7 +35,7 @@ namespace Core.Pieces
             var piece = go.GetComponent<Piece>();
             piece.Init(config, pos);
             
-            GameManager.Instance.board.PlacePiece(piece, pos);   
+            BoardManager.Instance.PlacePiece(piece, pos);   
             PieceRegistry.Instance.AddPiece(piece);
             
             return piece;

@@ -13,7 +13,7 @@ namespace Core.Wind
         // World position conversion helper
         public Transform tileOrigin;
 
-        private BoardManager board => GameManager.Instance.board;
+        private BoardManager board => BoardManager.Instance;
         
         
         public Vector3 CellToWorld(Vector2Int p)
