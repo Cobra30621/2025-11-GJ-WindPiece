@@ -49,3 +49,13 @@ MonoBehaviour:
     type: 0
   - tile: {fileID: 11400000, guid: 2a25fcde13033274685e657a4154b963, type: 2}
     type: 0
+  - tile: {fileID: 11400000, guid: 9fbe1faf847049d4cb7c0f4d2ab47b74, type: 2}
+    type: 1
+  - tile: {fileID: 11400000, guid: 4e88ef233b494b04bac223ed933affc9, type: 2}
+    type: 1
+  - tile: {fileID: 11400000, guid: bedfc63e08d0b5848b4dd2a7e0890016, type: 2}
+    type: 1
+  - tile: {fileID: 11400000, guid: b875e9305b46f3147902cf2090d27658, type: 2}
+    type: 1
+  - tile: {fileID: 11400000, guid: 76ebe697572918c4fa7a3568c1b29e78, type: 2}
+    type: 1
