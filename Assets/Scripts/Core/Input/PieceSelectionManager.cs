@@ -54,12 +54,16 @@ namespace Core.Input
 
             previewInstance = Instantiate(previewPrefab);
             previewInstance.GetComponent<PiecePreviewController>().SetPiece(SelectedPiece.image);
+            
+            PlacementPreviewManager.Instance.StartPreview(SelectedPiece);
         }
 
         public void DestroyPreview()
         {
             if (previewInstance != null)
                 Destroy(previewInstance);
+            
+            PlacementPreviewManager.Instance.StopPreview();
         }
     }
 }

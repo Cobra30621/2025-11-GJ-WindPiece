@@ -5,6 +5,7 @@ namespace Core.Pieces
     public class EnemyPiece : global::Core.Pieces.Piece
     {
         public Direction MoveDirection = Direction.Left;
+        public bool canMove;
 
         void Awake()
         {

@@ -19,6 +19,12 @@ namespace Core.Board
             OccupiedPiece = null;
         }
         
+        public bool CanAddPiece()
+        {
+            var state = GetCellState();
+            return state  == CellState.Empty;
+        }
+        
         public bool CanMove()
         {
             var state = GetCellState();

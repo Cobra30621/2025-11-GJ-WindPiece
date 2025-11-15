@@ -119,7 +119,6 @@ namespace Core.Board
         public bool TryWorldToGrid(Vector3 worldPos, out Vector2Int gridPos)
         {
             gridPos = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
-            Debug.Log($"worldPos {worldPos} gridPos {gridPos}");
             return true;
         }
 
