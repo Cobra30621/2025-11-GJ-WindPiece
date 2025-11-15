@@ -1,0 +1,122 @@
+using System.Collections;
+using Core.Board;
+using Core.Pieces;
+using Core.Utils;
+using Core.Wind;
+using Game.Core.Pieces;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Core.GameFlow
+{
+    public class GameManager : MonoBehaviour
+    {
+        public static GameManager Instance;
+        public GameState CurrentState { get; private set; } = GameState.Init;
+        public BoardManager board;
+        public WindSystem windSystem;
+        public PieceAnimator animator;
+        public PieceFactory pieceFactory;
+        
+          private int spawnCounter = 0;
+
+        void Awake()
+        {
+            Instance = this;
+        }
+
+        [Button]
+        void Start()
+        {
+            StartGame();
+        }
+
+        public void StartGame()
+        {
+            CurrentState = GameState.PlayerTurn;
+            GameEventBus.OnTurnStart_Player?.Invoke();
+        }
+
+        public void StartPlayerTurn()
+        {
+            CurrentState = GameState.PlayerTurn;
+            GameEventBus.OnTurnStart_Player?.Invoke();
+        }
+
+        
+        public void PlacePiece(PieceConfig config, Vector2Int pos)
+        {
+            if (CurrentState != GameState.PlayerTurn) return;
+
+            // Instantiate & place
+            var piece = pieceFactory.Spawn(config, pos);
+            piece.SpawnOrder = ++spawnCounter;
+            
+
+            GameEventBus.OnPiecePlaced?.Invoke(piece);
+
+            // 啟動風解算流程（包含動畫）
+            StartCoroutine(HandlePlaceAndResolve(piece));
+        }
+        
+
+        IEnumerator HandlePlaceAndResolve(Piece placed)
+        {
+            CurrentState = GameState.Animating;
+            GameEventBus.OnWindStart?.Invoke();
+
+            // windSystem.Resolve returns sequence of moves to play
+            var moves = windSystem.ResolveWindAndGetMoves(placed);
+
+            yield return animator.PlayMoves(moves);
+
+            GameEventBus.OnWindEnd?.Invoke();
+
+            // 檢查勝負
+            CheckLevelEnd();
+
+            // 下一階段：敵方回合
+            StartCoroutine(HandleEnemyTurn());
+        }
+
+        IEnumerator HandleEnemyTurn()
+        {
+            CurrentState = GameState.EnemyTurn;
+            GameEventBus.OnTurnStart_Enemy?.Invoke();
+
+            // 簡單：所有敵方棋子按 MoveDirection 嘗試移動一格（不觸發風）
+            foreach (var cell in board.AllCells())
+            {
+                var p = cell.OccupiedPiece as EnemyPiece;
+                if (p == null) continue;
+                Vector2Int to = p.Position + UtilsTool.DirectionToVector2Int(p.MoveDirection);
+                if (board.IsInside(to) && board.IsEmpty(to))
+                {
+                    board.RemovePiece(p);
+                    board.PlacePiece(p, to);
+                    // Optionally animate; here we just call animator
+                    yield return animator.PlayMoves(new System.Collections.Generic.List<PieceMoveResult>{
+                        new PieceMoveResult{ piece = p, from = p.Position, to = to, isFalling = false }
+                    });
+                }
+                // 若走出邊界或掉到洞，則按規則處理
+            }
+
+            // 检查胜负并回到玩家回合
+            CheckLevelEnd();
+            StartPlayerTurn();
+        }
+
+        public void CheckLevelEnd()
+        {
+            // 簡單示例：若場上沒有 Enemy 則過關
+            foreach (var c in board.AllCells())
+                if (c.OccupiedPiece != null && c.OccupiedPiece.PieceType == PieceType.Enemy)
+                    return;
+            CurrentState = GameState.Win;
+            Debug.Log("Win!");
+        }
+    }
+}
