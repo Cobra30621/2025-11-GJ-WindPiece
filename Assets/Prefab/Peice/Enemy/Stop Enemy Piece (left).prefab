@@ -60,20 +60,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stop Enemy Piece (left)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4321117036322219271, guid: 87fe5d1596cb346d9a476c91670019cf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8158967242027800175, guid: 87fe5d1596cb346d9a476c91670019cf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 422094524880342905}
+      addedObject: {fileID: 370848513405393925}
   m_SourcePrefab: {fileID: 100100000, guid: 87fe5d1596cb346d9a476c91670019cf, type: 3}
 --- !u!1 &1479918249820338292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8158967242027800175, guid: 87fe5d1596cb346d9a476c91670019cf, type: 3}
   m_PrefabInstance: {fileID: 7328412898696703515}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &422094524880342905
+--- !u!95 &370848513405393925
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -83,7 +84,7 @@ Animator:
   m_GameObject: {fileID: 1479918249820338292}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a416a9f22b73daa418f2e25eb7dfecdc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 71c4d209505231449b43720abfe483a1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
