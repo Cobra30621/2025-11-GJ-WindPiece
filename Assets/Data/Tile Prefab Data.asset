@@ -19,5 +19,11 @@ MonoBehaviour:
     prefab: {fileID: 3242584395618076771, guid: 3216d0e5665c4fc4fbf1e4142bcaa446, type: 3}
   - tile: {fileID: 11400000, guid: 1558ea7e937e35b42a92bd2e66b88f87, type: 2}
     prefab: {fileID: 2906105272133516613, guid: 27dac22ba7da974488c0bce3bdedcfe8, type: 3}
-  - tile: {fileID: 11400000, guid: 40a80f83dc7523b4998b480c02986885, type: 2}
-    prefab: {fileID: 8158967242027800175, guid: a9b9827018ec94039a27145ac86ee2be, type: 3}
+  - tile: {fileID: 11400000, guid: 695c0540cbc6c6c45842a3b3c599e462, type: 2}
+    prefab: {fileID: 0}
+  - tile: {fileID: 11400000, guid: 0e9ae6a566a537c4ab935dccdcb78aba, type: 2}
+    prefab: {fileID: 0}
+  - tile: {fileID: 11400000, guid: bf4040a52f21f0741a8bfc3e7b52eca1, type: 2}
+    prefab: {fileID: 0}
+  - tile: {fileID: 11400000, guid: 7e1aa45225c77ba4ca26b72283518497, type: 2}
+    prefab: {fileID: 0}
