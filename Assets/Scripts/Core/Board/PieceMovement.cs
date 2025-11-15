@@ -91,14 +91,16 @@ namespace Core.Board
             while (!deathQueue.IsEmpty)
             {
                 var deadPiece = deathQueue.Pop();
-                if (deadPiece is WindPiece)
+                if (deadPiece is WindPiece || deadPiece is EnemyPiece)
                     EnqueueGlobalWind(deadPiece, moves);
             }
         }
 
         private void EnqueueGlobalWind(Piece sourceOfDeath, List<PieceMoveResult> moves)
         {
+            
             Vector2Int windDir = GetWindDirection(sourceOfDeath);
+            Debug.Log($"EnqueueGlobalWind: {sourceOfDeath.name} {windDir}");
             foreach (var piece in GetAllPieces())
             {
                 ApplyPieceMove(piece, windDir, moves);
@@ -112,6 +114,8 @@ namespace Core.Board
         {
             if (piece is WindPiece wp)
                 return UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
+            if (piece is EnemyPiece ep)
+                return UtilsTool.DirectionToVector2Int(ep.MoveDirection);
             return Vector2Int.zero;
         }
 

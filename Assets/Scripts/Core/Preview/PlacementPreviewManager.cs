@@ -67,7 +67,6 @@ public class PlacementPreviewManager : MonoBehaviour
         if (!TryGetHoverCell(out Vector2Int cellPos)) return;
 
         // 移動透明棋子
-        Debug.Log($"cell Pos {cellPos}");
         previewPieceRoot.transform.position = board.GridToWorld(cellPos);
 
         // // 判斷是否可放置
