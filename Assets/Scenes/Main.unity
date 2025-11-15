@@ -259,6 +259,8 @@ MonoBehaviour:
   pieceConfigs:
   - {fileID: 11400000, guid: 3bae4f79078ce476fa82a03b2900bce2, type: 2}
   - {fileID: 11400000, guid: e3aac97c8160947e6a94708e13184007, type: 2}
+  - {fileID: 11400000, guid: a9503b62df7f942c1bbaff47683a3a37, type: 2}
+  - {fileID: 11400000, guid: 145ebd0f63616423baa9e3936d1475d4, type: 2}
 --- !u!1 &144959261
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core.Board.BoardManager
   groundTilemap: {fileID: 0}
+  tileTypeData: {fileID: 0}
   size: {x: 4, y: 4}
   spawnOffset: {x: 0.5, y: 0.5, z: 0}
 --- !u!4 &837218616

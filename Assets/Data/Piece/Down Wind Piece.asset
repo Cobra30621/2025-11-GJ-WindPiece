@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 856117388daa4772b75228700ad67990, type: 3}
-  m_Name: Left Wind Piece
+  m_Name: Down Wind Piece
   m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Pieces.PieceConfig
   pieceName: 
-  image: {fileID: 3493610608438326223, guid: 97fc9784f8838d64e8fb27fafe3fbcc5, type: 3}
-  prefab: {fileID: 8158967242027800175, guid: a9b9827018ec94039a27145ac86ee2be, type: 3}
-  windDirection: 2
+  image: {fileID: -775153409343369993, guid: fe4002946a28eeb43a6ad774824f32f9, type: 3}
+  prefab: {fileID: 5263307599557126888, guid: dfe6b7833c29741eeb6e70e1ffa4eac2, type: 3}
+  windDirection: 1
   windPower: 1
   isObstacle: 0

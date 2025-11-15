@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7944426244664264925}
   - component: {fileID: 2706133174985887888}
   m_Layer: 0
-  m_Name: Wind Piece
+  m_Name: Wind Piece Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
