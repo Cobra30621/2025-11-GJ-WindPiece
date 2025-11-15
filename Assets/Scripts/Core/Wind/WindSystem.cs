@@ -11,94 +11,129 @@ namespace Core.Wind
         public BoardManager board;
         private DeathRattleQueue deathQueue = new DeathRattleQueue();
 
-        /// <summary>
-        /// 主介面：解析風效果，回傳每個棋子移動結果
-        /// </summary>
+        // ============================================================
+        // 共用風吹邏輯：移動、掉落、阻擋
+        // ============================================================
+        private bool ApplyWindToPiece(Piece piece, Vector2Int windDir, List<PieceMoveResult> moves)
+        {
+            if (piece.Config.isObstacle)
+                return false;
+
+            // 已經掉落的棋字無法移動
+            if (piece.IsFalling)
+                return false;
+
+            Vector2Int targetPos = piece.Position + windDir;
+            bool isFalling = false;
+
+            if (board.IsHole(targetPos))
+            {
+                isFalling = true;
+            }
+            else if (board.ISObstacle(targetPos))
+            {
+                return false; // 被阻擋，不移動
+            }
+
+            moves.Add(new PieceMoveResult
+            {
+                piece = piece,
+                from = piece.Position,
+                to = targetPos,
+                isFalling = isFalling
+            });
+
+            board.RemovePiece(piece);
+            board.PlacePiece(piece, targetPos);
+
+            if (isFalling)
+                RegisterFallingPiece(piece);
+
+            return true;
+        }
+
+        // ============================================================
+        // 1) 主入口：依據指定來源棋子 → 局部風影響
+        // ============================================================
         public List<PieceMoveResult> ResolveWindAndGetMoves(Piece source)
         {
             var moves = new List<PieceMoveResult>();
 
+            // 來源棋子吹風（只吹範圍內的棋子）
             EnqueueWindFrom(source, moves);
 
-            // 處理掉落亡語
+            // 若有掉落 → 亡語風吹（全場）
             while (!deathQueue.IsEmpty)
             {
-                var p = deathQueue.Pop();
-                EnqueueWindFrom(p, moves);
+                var deadPiece = deathQueue.Pop();
+                ResolveGlobalWind(deadPiece, moves);
             }
 
             return moves;
         }
 
-        /// <summary>
-        /// 依照來源棋子，計算哪些棋子會被吹動
-        /// </summary>
+        // ============================================================
+        // 2) 局部風吹：依據來源棋子風向 → 吹影響範圍內的棋子（非全場）
+        // ============================================================
         private void EnqueueWindFrom(Piece source, List<PieceMoveResult> moves)
         {
-            if (!(source is WindPiece wp)) return;
+            if (!(source is WindPiece wp))
+                return;
 
-            Vector2Int windDir = Utils.UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
+            Vector2Int windDir = UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
             Vector2Int origin = source.Position;
 
             var allPieces = PieceRegistry.Instance.GetAllPieces();
 
             foreach (var piece in allPieces)
             {
-                if (piece == source) continue; // 不吹自己
-                if (piece.Config.isObstacle) continue; // 障礙物不會被吹
-
-                bool inRange = false;
-                bool isFalling = false;
-
-                // 判定棋子是否在風範圍
-                if (windDir == Vector2Int.right && piece.Position.x >= origin.x) inRange = true;
-                else if (windDir == Vector2Int.left && piece.Position.x <= origin.x) inRange = true;
-                else if (windDir == Vector2Int.up && piece.Position.y >= origin.y) inRange = true;
-                else if (windDir == Vector2Int.down && piece.Position.y <= origin.y) inRange = true;
-                
-                if (!inRange) continue;
-                
-                
-
-                // 計算下一格位置 (一次吹一格)
-                Vector2Int targetPos = piece.Position + windDir;
-                var targetCell = board.GetCell(targetPos);
-         
-                
-                // 掉入洞
-                // TODO 判定放在
-                Debug.Log($"get cell {targetPos}, {board.GetCell(targetPos)}");
-
-                if (board.IsHole(targetPos))
-                {
-                    isFalling = true;
-                }
-                // 移動判定
-                else if ( board.ISObstacle(targetPos))
-                {
-                    // 無法移動，跳過
+                if (piece == source)
                     continue;
-                }
-                
-                // 建立移動結果
-                var moveResult = new PieceMoveResult
-                {
-                    piece = piece,
-                    from = piece.Position,
-                    to = targetPos,
-                    isFalling = isFalling
-                };
-                moves.Add(moveResult);
 
-                // 更新棋盤狀態
-                board.RemovePiece(piece);
-                board.PlacePiece(piece, targetPos);
+                if (piece.Config.isObstacle)
+                    continue;
+
+                // 方向範圍判定
+                bool inRange =
+                    (windDir == Vector2Int.right && piece.Position.x >= origin.x) ||
+                    (windDir == Vector2Int.left  && piece.Position.x <= origin.x) ||
+                    (windDir == Vector2Int.up    && piece.Position.y >= origin.y) ||
+                    (windDir == Vector2Int.down  && piece.Position.y <= origin.y);
+
+                if (!inRange)
+                    continue;
+
+                ApplyWindToPiece(piece, windDir, moves);
             }
         }
 
-        /// <summary>
-        /// 外部可用：將掉落棋子註冊進亡語隊列
-        /// </summary>
-        public void RegisterFallingPiece(Piece p) => deathQueue.Add(p);
+        // ============================================================
+        // 3) 亡語風吹：整個場上所有棋子都吹 1 格
+        // ============================================================
+        private void ResolveGlobalWind(Piece sourceOfDeath, List<PieceMoveResult> moves)
+        {
+            if (!(sourceOfDeath is WindPiece wp))
+                return;
+
+            Vector2Int windDir = UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
+
+            var allPieces = PieceRegistry.Instance.GetAllPieces();
+
+            foreach (var piece in allPieces)
+            {
+                Debug.Log($"Global wind on {piece.name}");
+
+                ApplyWindToPiece(piece, windDir, moves);
+            }
+        }
+
+        // ============================================================
+        // 亡語註冊
+        // ============================================================
+        public void RegisterFallingPiece(Piece p)
+        {
+            p.IsFalling = true;
+            deathQueue.Add(p);
+        }
     }
 }
