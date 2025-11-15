@@ -13,17 +13,11 @@ MonoBehaviour:
   m_Name: Tile Prefab Data
   m_EditorClassIdentifier: Assembly-CSharp::TilePrefabData
   TilePrefabPairs:
-  - tile: {fileID: 11400000, guid: 74c35e0feeab43b43b7b64625f9e6021, type: 2}
-    prefab: {fileID: 777760428247941638, guid: 2862b75c6fa6d8945aad893f823d8559, type: 3}
-  - tile: {fileID: 11400000, guid: f670718764c463142a0f9a4e89bf7ff8, type: 2}
-    prefab: {fileID: 3242584395618076771, guid: 3216d0e5665c4fc4fbf1e4142bcaa446, type: 3}
-  - tile: {fileID: 11400000, guid: 1558ea7e937e35b42a92bd2e66b88f87, type: 2}
-    prefab: {fileID: 2906105272133516613, guid: 27dac22ba7da974488c0bce3bdedcfe8, type: 3}
-  - tile: {fileID: 11400000, guid: 695c0540cbc6c6c45842a3b3c599e462, type: 2}
+  - tile: {fileID: 11400000, guid: 01ba4f0b116634d4ab8b3e81fe02b6de, type: 2}
     prefab: {fileID: 0}
-  - tile: {fileID: 11400000, guid: 0e9ae6a566a537c4ab935dccdcb78aba, type: 2}
+  - tile: {fileID: 11400000, guid: cedb976b5c8c47f44b879ea193804b93, type: 2}
     prefab: {fileID: 0}
-  - tile: {fileID: 11400000, guid: bf4040a52f21f0741a8bfc3e7b52eca1, type: 2}
+  - tile: {fileID: 11400000, guid: a2f287d3bd85bd44bac497206eea9de4, type: 2}
     prefab: {fileID: 0}
-  - tile: {fileID: 11400000, guid: 7e1aa45225c77ba4ca26b72283518497, type: 2}
+  - tile: {fileID: 11400000, guid: 440467547265da44f91393c401a5eb8a, type: 2}
     prefab: {fileID: 0}
