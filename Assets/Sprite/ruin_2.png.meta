@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 26775838f97ba2842bbd08652bddf356
+guid: 62622f9292f3d084aa935f1351efebd9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4982608737908864932
-    second: ruin_1_0
+      213: 8873026652846064949
+    second: ruin_2_0
+  - first:
+      213: 5033299591480444779
+    second: ruin_2_1
+  - first:
+      213: 3991158545225625587
+    second: ruin_2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ruin_1_0
+      name: ruin_2_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 3
-        width: 119
-        height: 110
+        x: 0
+        y: 0
+        width: 81
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4a7b0d58f38c52540800000000000000
-      internalID: 4982608737908864932
+      spriteID: 535867dbab2532b70800000000000000
+      internalID: 8873026652846064949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruin_2_1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 68
+        width: 117
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b678f469f4fd9d540800000000000000
+      internalID: 5033299591480444779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruin_2_2
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 12
+        width: 78
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ff20720d81736730800000000000000
+      internalID: 3991158545225625587
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ruin_1_0: 4982608737908864932
+      ruin_2_0: 8873026652846064949
+      ruin_2_1: 5033299591480444779
+      ruin_2_2: 3991158545225625587
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
