@@ -19,6 +19,36 @@ namespace Core.Board
             OccupiedPiece = null;
         }
         
+        public bool CanMove()
+        {
+            var state = GetCellState();
+            return state  == CellState.Empty || 
+                   state  == CellState.Hole;
+        }
+        
+
+        public CellState GetCellState()
+        {
+            if (OccupiedPiece != null)
+            {
+                if (OccupiedPiece.Config.isObstacle)
+                {
+                    return CellState.Obstacle;
+                }
+                else
+                {
+                    return CellState.Piece;
+                }
+            }
+
+            if (Type == TileType.Hole)
+            {
+                return CellState.Hole;
+            }
+
+            return CellState.Empty;
+        }
+
 
         public bool IsHole()
         {

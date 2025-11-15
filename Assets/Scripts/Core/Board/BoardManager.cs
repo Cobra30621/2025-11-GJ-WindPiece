@@ -84,56 +84,31 @@ namespace Core.Board
         //  Cell 狀態判斷
         // ========================
 
-        public enum CellState
+        public bool IsHole(Vector2Int p)
         {
-            Empty,
-            Piece,
-            Obstacle,
-            Hole,
-            Unknown
+            return GetCellState(p) == CellState.Hole;
         }
+        
+        public bool CanMove(Vector2Int p)
+        {
+            TileCell c = GetCell(p);
+            if (c == null) return true;
 
+            return c.CanMove();
+        }
+        
         public CellState GetCellState(Vector2Int p)
         {
             TileCell c = GetCell(p);
+            if (c == null) return CellState.Hole;
 
-            // 沒有格子就視為洞
-            if (c == null)
-            {
-                return CellState.Hole;
-            }
-
-            // 格子上有棋子
-            if (c.OccupiedPiece != null)
-            {
-                if (c.OccupiedPiece.Config.isObstacle)
-                {
-                    return CellState.Obstacle;
-                }
-                else
-                {
-                    return CellState.Piece;
-                }
-            }
-
-            // 格子是洞
-            if (c.Type == TileType.Hole)
-            {
-                return CellState.Hole;
-            }
-
-            // 預設為空格
-            return CellState.Empty;
+            return c.GetCellState();
         }
 
 
         public bool CanAddPiece(Vector2Int p) => GetCellState(p) == CellState.Empty;
 
-        public bool CanMove(Vector2Int p)
-        {
-            var state = GetCellState(p);
-            return state == CellState.Empty || state == CellState.Hole;
-        }
+        
 
         // ========================
         //  坐標轉換

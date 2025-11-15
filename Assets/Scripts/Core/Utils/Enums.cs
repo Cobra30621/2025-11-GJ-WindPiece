@@ -4,4 +4,12 @@ namespace Core.Utils
     public enum TileType { Empty, Hole}
     public enum PieceType { Wind, Enemy, Obstacle }
     public enum Direction { Up, Down, Left, Right, None }
+    public enum CellState
+    {
+        Empty,
+        Piece,
+        Obstacle,
+        Hole,
+        Unknown
+    }
 }
