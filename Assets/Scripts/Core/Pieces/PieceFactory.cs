@@ -35,8 +35,7 @@ namespace Core.Pieces
             var piece = go.GetComponent<Piece>();
             piece.Init(config, pos);
             
-            BoardManager.Instance.PlacePiece(piece, pos);   
-            PieceRegistry.Instance.AddPiece(piece);
+            BoardManager.Instance.AddPiece(piece, pos);   
             
             return piece;
         }

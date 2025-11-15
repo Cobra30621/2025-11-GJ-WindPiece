@@ -45,7 +45,7 @@ namespace Core.Wind
                     // 簡單處理：destroy object
                     GameEventBus.OnPieceRemoved?.Invoke(m.piece);
                     Object.Destroy(m.piece.gameObject);
-                    PieceRegistry.Instance.RemovePiece(m.piece);
+                    BoardManager.Instance.RemovePiece(m.piece);
                 }
 
                 yield return null;

@@ -12,20 +12,30 @@ namespace Core.Board
     {
         public static BoardManager Instance { get; private set; }
         
-        public Tilemap groundTilemap; // 用於視覺
-        public TileTypeData tileTypeData; // 紀錄類別
+        public Tilemap groundTilemap;
+        public TileTypeData tileTypeData;
         public Vector2Int size = new Vector2Int(8, 8);
 
-        public Vector3 spawnOffset;   // 新增：生成偏移量
-        
+        public Vector3 spawnOffset;
+
         [ShowInInspector]
         private Dictionary<Vector2Int, TileCell> cells = new Dictionary<Vector2Int, TileCell>();
+
+        // -------------------------
+        // 🔥 PieceRegistry 被整合
+        // -------------------------
+        private List<Piece> pieces = new List<Piece>();
+
 
         void Awake()
         {
             Instance = this;
         }
 
+        // ========================
+        //  Board 基礎初始化
+        // ========================
+        
         public void GenerateBoard(Tilemap tilemap)
         {
             groundTilemap = tilemap;
@@ -49,102 +59,132 @@ namespace Core.Board
         {
             cells.Clear();
 
-            // Tilemap 的起點（全取正方向座標）
             BoundsInt bounds = groundTilemap.cellBounds;
 
             foreach (var pos in bounds.allPositionsWithin)
             {
                 TileBase tile = groundTilemap.GetTile(pos);
-                if (tile == null) continue; // 略過空白 Tile
+                if (tile == null) continue;
 
-                // 轉為簡單的 Vector2Int 方便你拿來當 dict key
                 Vector2Int gridPos = new Vector2Int(pos.x, pos.y);
+
                 foreach (TileTypePair pair in tileTypeData.TileTypePairs)
                 {
                     if (tile == pair.tile)
                     {
-                        TileType type = pair.type;
-                        var cell = new TileCell(gridPos,type);
-                        cells[gridPos] = cell;
-                        break; // 避免重複匹配
+                        cells[gridPos] = new TileCell(gridPos, pair.type);
+                        break;
                     }
-                }          
+                }
             }
+
             foreach (var kvp in cells)
             {
                 Debug.Log($"Cell[{kvp.Key.x}, {kvp.Key.y}] = {kvp.Value.Type}");
             }
         }
+
+        // ========================
+        //  基礎查詢
+        // ========================
+
         public bool IsInside(Vector2Int p) => cells.ContainsKey(p);
         public TileCell GetCell(Vector2Int p) => cells.ContainsKey(p) ? cells[p] : null;
 
+        public bool CanAddPiece(Vector2Int p)
+        {
+            var c = GetCell(p);
+            // 要有 Cell
+            if (c == null)
+            {
+                return false;
+            }
+
+            // 要是空的
+            if (c.Type != TileType.Empty)
+            {
+                return false;
+            }
+
+            // Cell 上不能有東西
+            if (c.OccupiedPiece != null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
+        public bool CanMove(Vector2Int p)
+        {
+            // 如果是洞可以移動
+            if (IsHole(p))
+            {
+                return true;
+            }
+
+            // 如果是空的，可以移動
+            if (IsEmpty(p))
+            {
+                return true;
+            }
+            
+            // 如果是障礙物，不能移動
+            if (ISObstacle(p))
+            {
+                return false;
+            }
+
+            // 如果是棋子，不能移動
+            if (IsPiece(p))
+            {
+                return false;
+            }
+
+            
+            return true;
+        }
+        
+        
+        
+        
         public bool IsEmpty(Vector2Int p)
         {
             var c = GetCell(p);
-            return c != null && c.OccupiedPiece == null && c.Type != TileType.Obstacle;
+            return c != null && c.OccupiedPiece == null;
         }
 
-/// <summary>
-        /// 是障礙物
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
         public bool ISObstacle(Vector2Int p)
         {
             var c = GetCell(p);
-            if (c != null)
-            {
-                if (c.Type == TileType.Obstacle)
-                {
-                    return true;
-                }
-                else
-                {
-                    return c.OccupiedPiece != null && c.OccupiedPiece.Config.isObstacle;
-                }
-            }
+            if (c == null) return false;
 
-            return false;
+            return c.OccupiedPiece != null && c.OccupiedPiece.Config.isObstacle;
         }
 
         public bool IsHole(Vector2Int p)
         {
             var c = GetCell(p);
-            if (c == null)
-            {
-                return true;
-            }
-            else
-            {
-                return c.Type == TileType.Hole;
-            }
+            if (c == null) return true;
+            return c.Type == TileType.Hole;
         }
+
+        public bool IsPiece(Vector2Int p)
+        {
+            var c = GetCell(p);
+            if (c == null) return false;
+            
+            return c.OccupiedPiece != null && !c.OccupiedPiece.Config.isObstacle;
+        }
+
+
 
         public Vector3 GridToWorld(Vector2Int gridPos)
         {
             return new Vector3(gridPos.x, gridPos.y, 0f) + spawnOffset;
         }
 
-        
-        public bool PlacePiece(Piece piece, Vector2Int pos)
-        {
-            var c = GetCell(pos);
-            if (c == null || c.Type == TileType.Obstacle || c.OccupiedPiece != null) return false;
-            c.OccupiedPiece = piece;
-            piece.Position = pos;
-            return true;
-        }
-
-        public void RemovePiece(Piece piece)
-        {
-            var c = GetCell(piece.Position);
-            if (c != null && c.OccupiedPiece == piece)
-            {
-                c.OccupiedPiece = null;
-            }
-            
-        }
-        
         public bool TryWorldToGrid(Vector3 worldPos, out Vector2Int gridPos)
         {
             gridPos = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
@@ -152,11 +192,85 @@ namespace Core.Board
             return true;
         }
 
-        public bool CanPlaceAt(Vector2Int pos)
+        public IEnumerable<TileCell> AllCells() => cells.Values;
+
+        // ================================
+        // 🔥 Piece 管理（原 PieceRegistry）
+        // ================================
+
+        /// <summary>
+        /// 新增棋子，並放入 TileCell
+        /// </summary>
+        public bool AddPiece(Piece piece, Vector2Int pos)
         {
-            return true; // TODO: check tile is empty
+            if (!CanAddPiece(pos))
+                return false;
+            
+            var cell = GetCell(pos);
+            cell.OccupiedPiece = piece;
+            piece.Position = pos;
+
+            pieces.Add(piece);
+
+            return true;
         }
 
-        public IEnumerable<TileCell> AllCells() => cells.Values;
+        /// <summary>
+        /// 移除棋子（包括清除 Cell 與摧毀 Obj）
+        /// </summary>
+        public void RemovePiece(Piece piece)
+        {
+            var cell = GetCell(piece.Position);
+            if (cell != null && cell.OccupiedPiece == piece)
+                cell.OccupiedPiece = null;
+
+            pieces.Remove(piece);
+
+            Destroy(piece.gameObject);
+        }
+
+        /// <summary>
+        /// 判斷格子是否被棋子占據
+        /// </summary>
+        public bool IsOccupiedPiece(Vector2Int pos)
+        {
+            return GetPieceAt(pos) != null;
+        }
+
+        /// <summary>
+        /// 取得特定格子的棋子
+        /// </summary>
+        public Piece GetPieceAt(Vector2Int pos)
+        {
+            var cell = GetCell(pos);
+            if (cell == null) return null;
+            return cell.OccupiedPiece;
+        }
+
+        /// <summary>
+        /// 取得所有活著的棋子
+        /// </summary>
+        public List<Piece> GetAllPieces()
+        {
+            // 回傳 shallow copy 避免外部修改
+            return new List<Piece>(pieces);
+        }
+
+        /// <summary>
+        /// 用於棋子移動時更新 Grid 資訊
+        /// </summary>
+        public void MovePiece(Piece piece, Vector2Int newPos)
+        {
+            var oldCell = GetCell(piece.Position);
+            var newCell = GetCell(newPos);
+
+            if (oldCell != null && oldCell.OccupiedPiece == piece)
+                oldCell.OccupiedPiece = null;
+
+            if (newCell != null)
+                newCell.OccupiedPiece = piece;
+
+            piece.Position = newPos;
+        }
     }
 }

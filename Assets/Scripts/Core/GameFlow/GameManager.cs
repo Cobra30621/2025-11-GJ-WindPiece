@@ -107,8 +107,7 @@ namespace Core.GameFlow
                 Vector2Int to = p.Position + UtilsTool.DirectionToVector2Int(p.MoveDirection);
                 if (board.IsInside(to) && board.IsEmpty(to))
                 {
-                    board.RemovePiece(p);
-                    board.PlacePiece(p, to);
+                    board.MovePiece(p, to);
                     // Optionally animate; here we just call animator
                     yield return animator.PlayMoves(new System.Collections.Generic.List<PieceMoveResult>{
                         new PieceMoveResult{ piece = p, from = p.Position, to = to, isFalling = false }
