@@ -1,0 +1,78 @@
+using System.Collections.Generic;
+using Core.Pieces;
+using Core.Utils;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+namespace Core.Board
+{
+    public class BoardManager : MonoBehaviour
+    {
+        public Tilemap groundTilemap; // 用於視覺
+        public Vector2Int size = new Vector2Int(8, 8);
+
+        [ShowInInspector]
+        private Dictionary<Vector2Int, TileCell> cells = new Dictionary<Vector2Int, TileCell>();
+
+        void Awake()
+        {
+            InitializeEmptyBoard();
+        }
+
+        public void InitializeEmptyBoard()
+        {
+            cells.Clear();
+            for (int x = 0; x < size.x; x++)
+            for (int y = 0; y < size.y; y++)
+            {
+                var p = new Vector2Int(x, y);
+                cells[p] = new TileCell(p, TileType.Empty);
+            }
+        }
+
+        public bool IsInside(Vector2Int p) => cells.ContainsKey(p);
+        public TileCell GetCell(Vector2Int p) => cells.ContainsKey(p) ? cells[p] : null;
+
+        public bool IsEmpty(Vector2Int p)
+        {
+            var c = GetCell(p);
+            return c != null && c.OccupiedPiece == null && c.Type != TileType.Obstacle;
+        }
+
+        public Vector3 GridToWorld(Vector2Int gridPos)
+        {
+            return new Vector3(gridPos.x, gridPos.y, 0f);
+        }
+
+        
+        public bool PlacePiece(Piece piece, Vector2Int pos)
+        {
+            var c = GetCell(pos);
+            if (c == null || c.Type == TileType.Obstacle || c.OccupiedPiece != null) return false;
+            c.OccupiedPiece = piece;
+            piece.Position = pos;
+            return true;
+        }
+
+        public void RemovePiece(Piece piece)
+        {
+            var c = GetCell(piece.Position);
+            if (c != null && c.OccupiedPiece == piece) c.OccupiedPiece = null;
+        }
+        
+        public bool TryWorldToGrid(Vector3 worldPos, out Vector2Int gridPos)
+        {
+            gridPos = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
+            Debug.Log($"worldPos {worldPos} gridPos {gridPos}");
+            return true;
+        }
+
+        public bool CanPlaceAt(Vector2Int pos)
+        {
+            return true; // TODO: check tile is empty
+        }
+
+        public IEnumerable<TileCell> AllCells() => cells.Values;
+    }
+}
