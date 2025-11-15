@@ -36,7 +36,11 @@ namespace Core.Board
             foreach (var piece in board.AllEnemies())
             {
                 if (piece is EnemyPiece enemy)
-                    ApplyPieceMove(enemy, UtilsTool.DirectionToVector2Int(enemy.MoveDirection), moves);
+                {
+                    if(enemy.canMove)
+                        ApplyPieceMove(enemy, UtilsTool.DirectionToVector2Int(enemy.MoveDirection), moves);
+                }
+                    
             }
 
             HandleDeathQueue(moves);
