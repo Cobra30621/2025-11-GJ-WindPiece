@@ -31,5 +31,10 @@ namespace Core.Pieces
         {
             transform.position = worldPos;
         }
+
+        public override string ToString()
+        {
+            return $"Piece: {Position} {Config.windDirection}";
+        }
     }
 }

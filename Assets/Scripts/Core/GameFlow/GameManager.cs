@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Core.Board;
 using Core.Pieces;
 using Core.Utils;
@@ -20,7 +21,9 @@ namespace Core.GameFlow
         public PieceAnimator animator;
         public PieceFactory pieceFactory;
         
-          private int spawnCounter = 0;
+        private int spawnCounter = 0;
+          
+        public List<PieceMoveResult> moves = new List<PieceMoveResult>();
 
         void Awake()
         {
@@ -68,9 +71,16 @@ namespace Core.GameFlow
             GameEventBus.OnWindStart?.Invoke();
 
             // windSystem.Resolve returns sequence of moves to play
-            var moves = windSystem.ResolveWindAndGetMoves(placed);
-
-            yield return animator.PlayMoves(moves);
+            Debug.Log($"handle wind {placed}");
+            moves = windSystem.ResolveWindAndGetMoves(placed);
+            
+            // moves 可直接傳給動畫系統或預覽系統
+            foreach(var move in moves)
+            {
+                move.piece.MoveToWorld(board.GridToWorld(move.to));
+            }
+            // yield return animator.PlayMoves(moves);
+            yield return null;
 
             GameEventBus.OnWindEnd?.Invoke();
 
@@ -116,7 +126,6 @@ namespace Core.GameFlow
                 if (c.OccupiedPiece != null && c.OccupiedPiece.PieceType == PieceType.Enemy)
                     return;
             CurrentState = GameState.Win;
-            Debug.Log("Win!");
         }
     }
 }

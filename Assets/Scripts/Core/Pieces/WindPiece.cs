@@ -1,4 +1,7 @@
+using Core.GameFlow;
 using Core.Utils;
+using Core.Wind;
+using Sirenix.OdinInspector;
 
 namespace Core.Pieces
 {
@@ -12,9 +15,18 @@ namespace Core.Pieces
             PieceType = PieceType.Wind;
         }
 
+        [Button]
         public override void OnActivate()
         {
             // 具體推動行為由 WindSystem 處理
+            // var moves = GameManager.Instance.windSystem.ResolveWindAndGetMoves(this);
+            //
+            //
+            // // moves 可直接傳給動畫系統或預覽系統
+            // foreach(var move in moves)
+            // {
+            //     move.piece.MoveToWorld(board.GridToWorld(move.to));
+            // }
         }
 
         public override void OnDeathRattle()
