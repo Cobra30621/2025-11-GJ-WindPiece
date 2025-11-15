@@ -6,24 +6,21 @@ using UnityEngine;
 
 namespace Core.Wind
 {
-    /// <summary>
-    /// 提供兩種介面：
-    /// - ResolveWindAndGetMoves(Piece source): 回傳要執行的 moves 列表（供 animator 播放）
-    /// - (內部) 處理掉落與亡語隊列
-    /// </summary>
     public class WindSystem : MonoBehaviour
     {
         public BoardManager board;
         private DeathRattleQueue deathQueue = new DeathRattleQueue();
 
-        // 主介面：接收來源棋子，回傳整套 move list（不直接執行）
+        /// <summary>
+        /// 主介面：解析風效果，回傳每個棋子移動結果
+        /// </summary>
         public List<PieceMoveResult> ResolveWindAndGetMoves(Piece source)
         {
             var moves = new List<PieceMoveResult>();
-            // 1) 初次來源觸發
+
             EnqueueWindFrom(source, moves);
 
-            // 2) 處理掉落觸發的亡語（依 spawn order）
+            // 處理掉落亡語
             while (!deathQueue.IsEmpty)
             {
                 var p = deathQueue.Pop();
@@ -33,50 +30,67 @@ namespace Core.Wind
             return moves;
         }
 
+        /// <summary>
+        /// 依照來源棋子，計算哪些棋子會被吹動
+        /// </summary>
         private void EnqueueWindFrom(Piece source, List<PieceMoveResult> moves)
         {
-            // 1) 找受影響的 pieces（簡單直線範圍）
             if (!(source is WindPiece wp)) return;
-            Vector2Int dir = Utils.UtilsTool.DirectionToVector2Int(wp.WindDirection);
 
-            for (int r = 1; r <= wp.WindRange; r++)
+            Vector2Int windDir = Utils.UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
+            Vector2Int origin = source.Position;
+
+            var allPieces = PieceRegistry.Instance.GetAllPieces();
+
+            Debug.Log($"source start move: {source}");
+            foreach (var piece in allPieces)
             {
-                Vector2Int cellPos = source.Position + dir * r;
-                var cell = board.GetCell(cellPos);
-                if (cell == null) break;
-                if (cell.Type == TileType.Obstacle) break;
-                if (cell.OccupiedPiece != null)
+                if (piece == source) continue; // 不吹自己
+                if (piece.Config.isObstacle) continue; // 障礙物不會被吹
+
+                bool inRange = false;
+
+                // 判定棋子是否在風範圍
+                if (windDir == Vector2Int.right && piece.Position.x <= origin.x) inRange = true;
+                else if (windDir == Vector2Int.left && piece.Position.x >= origin.x) inRange = true;
+                else if (windDir == Vector2Int.up && piece.Position.y >= origin.y) inRange = true;
+                else if (windDir == Vector2Int.down && piece.Position.y <= origin.y) inRange = true;
+                
+                if (!inRange) continue;
+                
+                
+
+                // 計算下一格位置 (一次吹一格)
+                Vector2Int targetPos = piece.Position + windDir;
+                var targetCell = board.GetCell(targetPos);
+                Debug.Log($"{piece} inrange: {inRange}, {targetCell}");
+
+                // 移動判定
+                if (targetCell == null || targetCell.Type == TileType.Obstacle || targetCell.OccupiedPiece != null)
                 {
-                    // 計算最終位移：一直推到下一格或停在障礙/邊界
-                    Vector2Int dest = cellPos;
-                    while (true)
-                    {
-                        Vector2Int next = dest + dir;
-                        var nextCell = board.GetCell(next);
-                        if (nextCell == null) // 掉出場外 -> mark falling and remove
-                        {
-                            var move = new PieceMoveResult{ piece = cell.OccupiedPiece, from = cellPos, to = next, isFalling = true };
-                            moves.Add(move);
-                            // update board state now: remove piece
-                            board.RemovePiece(cell.OccupiedPiece);
-                            deathQueue.Add(cell.OccupiedPiece);
-                            break;
-                        }
-                        if (nextCell.Type == TileType.Obstacle) break;
-                        if (nextCell.OccupiedPiece != null) { dest = next; continue; }
-                        // empty -> move into it
-                        var move2 = new PieceMoveResult{ piece = cell.OccupiedPiece, from = cellPos, to = next, isFalling = false };
-                        moves.Add(move2);
-                        // perform logical move in board
-                        board.RemovePiece(cell.OccupiedPiece);
-                        board.PlacePiece(cell.OccupiedPiece, next);
-                        break;
-                    }
+                    // 無法移動，跳過
+                    continue;
                 }
+
+                // 建立移動結果
+                var moveResult = new PieceMoveResult
+                {
+                    piece = piece,
+                    from = piece.Position,
+                    to = targetPos,
+                    isFalling = false
+                };
+                moves.Add(moveResult);
+
+                // 更新棋盤狀態
+                // board.RemovePiece(piece);
+                board.PlacePiece(piece, targetPos);
             }
         }
 
-        // 外部也可直接註冊掉落 pieces
+        /// <summary>
+        /// 外部可用：將掉落棋子註冊進亡語隊列
+        /// </summary>
         public void RegisterFallingPiece(Piece p) => deathQueue.Add(p);
     }
 }

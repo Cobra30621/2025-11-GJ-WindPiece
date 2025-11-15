@@ -9,7 +9,7 @@ namespace Game.Core.Pieces
         public string pieceName;
         public GameObject prefab;
 
-        public WindDirection windDirection;
+        public Direction windDirection;
         public int windPower = 1;
 
         public bool isObstacle;

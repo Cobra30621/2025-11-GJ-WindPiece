@@ -12,6 +12,8 @@ namespace Core.Board
         public Tilemap groundTilemap; // 用於視覺
         public Vector2Int size = new Vector2Int(8, 8);
 
+        public Vector3 spawnOffset;   // 新增：生成偏移量
+        
         [ShowInInspector]
         private Dictionary<Vector2Int, TileCell> cells = new Dictionary<Vector2Int, TileCell>();
 
@@ -42,7 +44,7 @@ namespace Core.Board
 
         public Vector3 GridToWorld(Vector2Int gridPos)
         {
-            return new Vector3(gridPos.x, gridPos.y, 0f);
+            return new Vector3(gridPos.x, gridPos.y, 0f) + spawnOffset;
         }
 
         
@@ -58,7 +60,11 @@ namespace Core.Board
         public void RemovePiece(Piece piece)
         {
             var c = GetCell(piece.Position);
-            if (c != null && c.OccupiedPiece == piece) c.OccupiedPiece = null;
+            if (c != null && c.OccupiedPiece == piece)
+            {
+                c.OccupiedPiece = null;
+            }
+            
         }
         
         public bool TryWorldToGrid(Vector3 worldPos, out Vector2Int gridPos)

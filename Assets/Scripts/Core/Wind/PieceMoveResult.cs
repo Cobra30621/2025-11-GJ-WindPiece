@@ -1,8 +1,10 @@
+using System;
 using Core.Pieces;
 using UnityEngine;
 
 namespace Core.Wind
 {
+    [Serializable]
     public struct PieceMoveResult
     {
         public Piece piece;
