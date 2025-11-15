@@ -540,10 +540,6 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1126356419}
-    - target: {fileID: 4811362345703466999, guid: cb065212364434f0e9bbb630f1bfccf4, type: 3}
-      propertyPath: boardTilemap
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6872534672444477753, guid: cb065212364434f0e9bbb630f1bfccf4, type: 3}
       propertyPath: m_Name
       value: Chess Input Controller

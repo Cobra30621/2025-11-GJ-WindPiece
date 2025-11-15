@@ -49,9 +49,9 @@ namespace Core.GameFlow
         }
 
         
-        public void PlacePiece(PieceConfig config, Vector2Int pos)
+        public bool PlacePiece(PieceConfig config, Vector2Int pos)
         {
-            if (CurrentState != GameState.PlayerTurn) return;
+            if (CurrentState != GameState.PlayerTurn) return false;
 
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);
@@ -61,6 +61,8 @@ namespace Core.GameFlow
             GameEventBus.OnPiecePlaced?.Invoke(piece);
             
             StartCoroutine(HandlePlaceAndResolve(piece));
+
+            return true;
         }
         
 
