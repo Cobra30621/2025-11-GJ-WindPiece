@@ -73,3 +73,18 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: 1991d9ef626cf494a9b1fb403e90b6d2, type: 2}
     prefab: {fileID: 1479918249820338292, guid: 11ed8d41712ec9e47a30688536cb0b71, type: 3}
     pieceConfig: {fileID: 11400000, guid: ec2483d723db847f78c0f1271f46ff85, type: 2}
+  - tile: {fileID: 11400000, guid: 5d3b23b7cf43498429d552d0bc82a795, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: e9b37d90b9e93234ab433d895f1033ea, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 5efee970d6d11b54cafa19d27ac32a53, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 1bbb9afb45864d542991581efa253b98, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: b1a98c0e132244446a976f567505d2d9, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 84b06613eebe50641950f48a486a7ac4, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 3d8240ae476771f46a52118049111e5d, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 9f37ca22f49c6e14d9fac96a4b7375c2, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 543e1632afc90f04a9d2cff67853ca91, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 4b2655a5697c1614a87e9c5f409b8159, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
