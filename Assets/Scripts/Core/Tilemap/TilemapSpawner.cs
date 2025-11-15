@@ -3,33 +3,41 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 public class TilemapSpawner : MonoBehaviour
 {
-    public Tilemap tilemap;  
+    public List<Tilemap> tilemaps;  
     public TilePrefabData tilePrefabData;
     void Start()
     {
         SpawnPrefabs();
     }
 
-    void SpawnPrefabs()
+    public void SpawnPrefabs()
     {
-        BoundsInt bounds = tilemap.cellBounds;
-
-        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        foreach (var map in tilemaps)
         {
-            TileBase tile = tilemap.GetTile(pos);
-            if (tile == null) continue; // 略過空白 Tile
+            if (map == null) continue;
 
-            foreach (TilePrefabPair pair in tilePrefabData.TilePrefabPairs)
+            BoundsInt bounds = map.cellBounds;
+
+            foreach (Vector3Int pos in bounds.allPositionsWithin)
             {
-                if (tile == pair.tile && pair.prefab != null)
+                TileBase tile = map.GetTile(pos);
+                if (tile == null) 
+                    continue;
+
+                // 找到對應 Prefab
+                foreach (TilePrefabPair pair in tilePrefabData.TilePrefabPairs)
                 {
-                    var ob = Instantiate(pair.prefab, transform);
-                    ob.transform.position = tilemap.GetCellCenterWorld(pos);
-                    break; // 避免重複匹配
+                    if (tile == pair.tile && pair.prefab != null)
+                    {
+                        GameObject ob = Instantiate(pair.prefab, transform);
+                        ob.transform.position = map.GetCellCenterWorld(pos);
+                        break; // 避免重複匹配
+                    }
                 }
             }
+
+            // 若要生完隱藏 Tilemap
+            map.gameObject.SetActive(false);
         }
-        
-        tilemap.gameObject.SetActive(false);
     }
 }

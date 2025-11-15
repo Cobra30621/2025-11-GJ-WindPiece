@@ -67,8 +67,9 @@ namespace Core.Wind
          
                 
                 // 掉入洞
+                // TODO 判定放在
                 Debug.Log($"get cell {targetPos}, {board.GetCell(targetPos)}");
-                if (targetCell == null ||targetCell.OccupiedPiece != null)
+                if (targetCell == null )
                 {
                     isFalling = true;
                 }
