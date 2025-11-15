@@ -75,6 +75,11 @@ namespace Core.Board
         public TileCell GetCell(Vector2Int p) => cells.TryGetValue(p, out var cell) ? cell : null;
         public IEnumerable<TileCell> AllCells() => cells.Values;
 
+        public List<Piece> AllEnemies()
+        {
+            return pieces.FindAll(p => p is EnemyPiece);
+        }
+
         // ========================
         //  Cell 狀態判斷
         // ========================

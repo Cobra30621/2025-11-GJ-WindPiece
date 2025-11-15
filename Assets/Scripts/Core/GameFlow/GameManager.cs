@@ -17,7 +17,6 @@ namespace Core.GameFlow
         public static GameManager Instance;
         public GameState CurrentState { get; private set; } = GameState.Init;
 
-        public WindSystem windSystem;
         public PieceAnimator animator;
         public PieceFactory pieceFactory;
         
@@ -84,7 +83,7 @@ namespace Core.GameFlow
             GameEventBus.OnWindStart?.Invoke();
 
             // windSystem.Resolve returns sequence of moves to play
-            moves = windSystem.ResolveWindAndGetMoves(piece);
+            moves = PieceMovement.Instance.ResolveWindMoves(piece);
          
             yield return animator.PlayMoves(moves);
 
@@ -98,23 +97,8 @@ namespace Core.GameFlow
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
 
-            var board = BoardManager.Instance;
-            // 簡單：所有敵方棋子按 MoveDirection 嘗試移動一格（不觸發風）
-            foreach (var cell in board.AllCells())
-            {
-                var p = cell.OccupiedPiece as EnemyPiece;
-                if (p == null) continue;
-                Vector2Int to = p.Position + UtilsTool.DirectionToVector2Int(p.MoveDirection);
-                if (board.CanMove(to))
-                {
-                    board.MovePiece(p, to);
-                    // Optionally animate; here we just call animator
-                    yield return animator.PlayMoves(new System.Collections.Generic.List<PieceMoveResult>{
-                        new PieceMoveResult{ piece = p, from = p.Position, to = to, isFalling = false }
-                    });
-                }
-                // 若走出邊界或掉到洞，則按規則處理
-            }
+            moves = PieceMovement.Instance.ResolveEnemyMoves();
+            yield return animator.PlayMoves(moves);
 
             // 检查胜负并回到玩家回合
             CheckLevelEnd();
