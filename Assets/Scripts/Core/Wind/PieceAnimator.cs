@@ -50,6 +50,8 @@ namespace Core.Wind
 
                 yield return null;
             }
+
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

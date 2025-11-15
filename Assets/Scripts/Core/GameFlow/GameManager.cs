@@ -59,25 +59,16 @@ namespace Core.GameFlow
             
 
             GameEventBus.OnPiecePlaced?.Invoke(piece);
-
-            // 啟動風解算流程（包含動畫）
+            
             StartCoroutine(HandlePlaceAndResolve(piece));
         }
         
 
         IEnumerator HandlePlaceAndResolve(Piece placed)
         {
-            CurrentState = GameState.Animating;
-            GameEventBus.OnWindStart?.Invoke();
-
-            // windSystem.Resolve returns sequence of moves to play
-            Debug.Log($"handle wind {placed}");
-            moves = windSystem.ResolveWindAndGetMoves(placed);
-         
-            yield return animator.PlayMoves(moves);
-            yield return null;
-
-            GameEventBus.OnWindEnd?.Invoke();
+            yield return HandleWind(placed);
+            
+            placed.OnActivate();
 
             // 檢查勝負
             CheckLevelEnd();
@@ -85,6 +76,21 @@ namespace Core.GameFlow
             // 下一階段：敵方回合
             StartCoroutine(HandleEnemyTurn());
         }
+
+        public IEnumerator HandleWind(Piece piece)
+        {
+            CurrentState = GameState.Animating;
+            GameEventBus.OnWindStart?.Invoke();
+
+            // windSystem.Resolve returns sequence of moves to play
+            moves = windSystem.ResolveWindAndGetMoves(piece);
+         
+            yield return animator.PlayMoves(moves);
+
+            GameEventBus.OnWindEnd?.Invoke();
+        }
+        
+        
 
         IEnumerator HandleEnemyTurn()
         {

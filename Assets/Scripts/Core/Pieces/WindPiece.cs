@@ -2,6 +2,7 @@ using Core.GameFlow;
 using Core.Utils;
 using Core.Wind;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Core.Pieces
 {
@@ -15,7 +16,6 @@ namespace Core.Pieces
         [Button]
         public override void OnActivate()
         {
-           
         }
 
         public override void OnDeathRattle()
