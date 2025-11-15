@@ -45,3 +45,11 @@ MonoBehaviour:
     prefab: {fileID: 2089060925281772121, guid: 2a1d82e8ecac2f9449f1fbad7b512905, type: 3}
   - tile: {fileID: 11400000, guid: 4d8dc394758bb114688d164fd0150d33, type: 2}
     prefab: {fileID: 2089060925281772121, guid: 11a2375fff002164089b2027009daa39, type: 3}
+  - tile: {fileID: 11400000, guid: c83c343137f70b94d97a490c7b74a6bf, type: 2}
+    prefab: {fileID: 1479918249820338292, guid: 94c1b74fc20854606b1a13e8bc33b4f7, type: 3}
+  - tile: {fileID: 11400000, guid: 84518fbc05417f146873e1ff655c1da9, type: 2}
+    prefab: {fileID: 1479918249820338292, guid: a7a82a1f95c1fdd4faccdd3318862d0a, type: 3}
+  - tile: {fileID: 11400000, guid: df3aa9ee1d78a374c91e4a8366152b61, type: 2}
+    prefab: {fileID: 1479918249820338292, guid: cd7753a4befba374e92bb3dc112718a9, type: 3}
+  - tile: {fileID: 11400000, guid: 1991d9ef626cf494a9b1fb403e90b6d2, type: 2}
+    prefab: {fileID: 1479918249820338292, guid: 11ed8d41712ec9e47a30688536cb0b71, type: 3}
