@@ -84,7 +84,14 @@ namespace Core.Board
             var c = GetCell(p);
             if (c != null)
             {
-                return c.Type == TileType.Obstacle || c.OccupiedPiece.Config.isObstacle;
+                if (c.Type == TileType.Obstacle)
+                {
+                    return true;
+                }
+                else
+                {
+                    return c.OccupiedPiece != null && c.OccupiedPiece.Config.isObstacle;
+                }
             }
 
             return false;
