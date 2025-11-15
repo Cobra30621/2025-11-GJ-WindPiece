@@ -10,6 +10,7 @@ namespace Core.Board
     public class BoardManager : MonoBehaviour
     {
         public Tilemap groundTilemap; // 用於視覺
+        public TileTypeData tileTypeData; // 紀錄類別
         public Vector2Int size = new Vector2Int(8, 8);
 
         public Vector3 spawnOffset;   // 新增：生成偏移量
@@ -20,6 +21,7 @@ namespace Core.Board
         void Awake()
         {
             InitializeEmptyBoard();
+            ReadTilemapToDict();
         }
 
         public void InitializeEmptyBoard()
@@ -33,7 +35,36 @@ namespace Core.Board
             }
         }
 
+        public void ReadTilemapToDict()
+        {
+            cells.Clear();
 
+            // Tilemap 的起點（全取正方向座標）
+            BoundsInt bounds = groundTilemap.cellBounds;
+
+            foreach (var pos in bounds.allPositionsWithin)
+            {
+                TileBase tile = groundTilemap.GetTile(pos);
+                if (tile == null) continue; // 略過空白 Tile
+
+                // 轉為簡單的 Vector2Int 方便你拿來當 dict key
+                Vector2Int gridPos = new Vector2Int(pos.x, pos.y);
+                foreach (TileTypePair pair in tileTypeData.TileTypePairs)
+                {
+                    if (tile == pair.tile)
+                    {
+                        TileType type = pair.type;
+                        var cell = new TileCell(gridPos,type);
+                        cells[gridPos] = cell;
+                        break; // 避免重複匹配
+                    }
+                }          
+            }
+            foreach (var kvp in cells)
+            {
+                Debug.Log($"Cell[{kvp.Key.x}, {kvp.Key.y}] = {kvp.Value.Type}");
+            }
+        }
         public bool IsInside(Vector2Int p) => cells.ContainsKey(p);
         public TileCell GetCell(Vector2Int p) => cells.ContainsKey(p) ? cells[p] : null;
 
