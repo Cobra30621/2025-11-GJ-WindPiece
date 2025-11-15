@@ -55,7 +55,7 @@ namespace Core.Board
             if (!board.CanMove(targetPos))
                 return false;
 
-            bool isFalling = board.GetCellState(targetPos) == BoardManager.CellState.Hole;
+            bool isFalling = board.IsHole(targetPos);
 
             moves.Add(new PieceMoveResult
             {
