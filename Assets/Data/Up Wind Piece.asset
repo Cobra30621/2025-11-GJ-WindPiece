@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Up Wind Piece
   m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Pieces.PieceConfig
   pieceName: 
+  image: {fileID: -4025411565391583256, guid: ad01c56cdeef4d04ca19d50ee8bb5f3a, type: 3}
   prefab: {fileID: 8158967242027800175, guid: 46528a6a252ee404a97c9c842ef5665d, type: 3}
   windDirection: 0
   windPower: 1
