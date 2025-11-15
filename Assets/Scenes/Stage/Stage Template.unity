@@ -351,7 +351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5924003251464557808, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: m_Name
-      value: Stage Template
+      value: Stage
       objectReference: {fileID: 0}
     - target: {fileID: 5924003251464557808, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: m_IsActive
@@ -362,6 +362,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
+--- !u!114 &1388409164 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
+  m_PrefabInstance: {fileID: 1388409163}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f166f005e449e98b036aaa9b26b0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.Stage.Stage
 --- !u!1001 &5590446600770294520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,7 +497,7 @@ PrefabInstance:
     - target: {fileID: 9075973001082411769, guid: 96a774248564149329866dd3ae041ac6, type: 3}
       propertyPath: currentStageInstance
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1388409164}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
