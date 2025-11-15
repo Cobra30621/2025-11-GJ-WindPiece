@@ -105,7 +105,7 @@ namespace Core.GameFlow
                 var p = cell.OccupiedPiece as EnemyPiece;
                 if (p == null) continue;
                 Vector2Int to = p.Position + UtilsTool.DirectionToVector2Int(p.MoveDirection);
-                if (board.IsInside(to) && board.IsEmpty(to))
+                if (board.CanMove(to))
                 {
                     board.MovePiece(p, to);
                     // Optionally animate; here we just call animator

@@ -17,6 +17,11 @@ namespace Core.Wind
         private bool ApplyWindToPiece(Piece piece, Vector2Int windDir, List<PieceMoveResult> moves)
         {
             Vector2Int targetPos = piece.Position + windDir;
+            if (piece.Config.isObstacle)
+            {
+                return false;
+            }
+            
             if (!board.CanMove(targetPos))
                 return false;
             
@@ -25,7 +30,7 @@ namespace Core.Wind
                 return false;
 
             
-            bool isFalling = board.IsHole(targetPos);
+            bool isFalling = board.GetCellState(targetPos) == BoardManager.CellState.Hole;
             
             moves.Add(new PieceMoveResult
             {
