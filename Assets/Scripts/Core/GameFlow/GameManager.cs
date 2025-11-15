@@ -83,7 +83,7 @@ namespace Core.GameFlow
             GameEventBus.OnWindStart?.Invoke();
 
             // windSystem.Resolve returns sequence of moves to play
-            moves = PieceMovement.Instance.ResolveWindAndGetMoves(piece);
+            moves = PieceMovement.Instance.ResolveWindMoves(piece);
          
             yield return animator.PlayMoves(moves);
 
@@ -97,7 +97,7 @@ namespace Core.GameFlow
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
 
-            moves = PieceMovement.Instance.ResolveEnemyAndGetMoves();
+            moves = PieceMovement.Instance.ResolveEnemyMoves();
             yield return animator.PlayMoves(moves);
 
             // 检查胜负并回到玩家回合

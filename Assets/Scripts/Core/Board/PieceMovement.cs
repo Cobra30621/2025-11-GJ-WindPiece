@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Core.Pieces;
 using Core.Utils;
@@ -11,109 +9,54 @@ namespace Core.Board
     public class PieceMovement : MonoBehaviour
     {
         public static PieceMovement Instance { get; private set; }
+        private BoardManager board => BoardManager.Instance;
+        private DeathRattleQueue deathQueue = new DeathRattleQueue();
 
         private void Awake()
         {
             Instance = this;
         }
 
-        private BoardManager board => BoardManager.Instance;
-        
-        private DeathRattleQueue deathQueue = new DeathRattleQueue();
-
-        
         // ============================================================
-        // 1) 主入口：依據指定來源棋子 → 局部風影響
+        // 公共方法：取得 Wind 或 Enemy 移動結果
         // ============================================================
-        public List<PieceMoveResult> ResolveWindAndGetMoves(Piece source)
+        public List<PieceMoveResult> ResolveWindMoves(Piece source)
         {
             var moves = new List<PieceMoveResult>();
+            if (source is WindPiece)
+                EnqueueDirectionalMoves(GetAllPiecesExcept(source), source.Position, GetWindDirection(source), moves);
 
-            // 來源棋子吹風（只吹範圍內的棋子）
-            EnqueueWindFrom(source, moves);
-            
-            PieceMovement.Instance.HandleDeathQueue(moves);
-            return moves;
-        }
-
-        // ============================================================
-        // 2) 局部風吹：依據來源棋子風向 → 吹影響範圍內的棋子（非全場）
-        // ============================================================
-        private void EnqueueWindFrom(Piece source, List<PieceMoveResult> moves)
-        {
-            if (!(source is WindPiece wp))
-                return;
-
-            Vector2Int windDir = UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
-            Vector2Int origin = source.Position;
-
-            var allPieces = BoardManager.Instance.GetAllPieces();
-
-            foreach (var piece in allPieces)
-            {
-                if (piece == source)
-                    continue;
-
-                if (piece.Config.isObstacle)
-                    continue;
-
-                // 方向範圍判定
-                bool inRange =
-                    (windDir == Vector2Int.right && piece.Position.x >= origin.x) ||
-                    (windDir == Vector2Int.left  && piece.Position.x <= origin.x) ||
-                    (windDir == Vector2Int.up    && piece.Position.y >= origin.y) ||
-                    (windDir == Vector2Int.down  && piece.Position.y <= origin.y);
-
-                if (!inRange)
-                    continue;
-
-                ApplyPieceMove(piece, windDir, moves);
-
-            }
-        }
-        
-        public List<PieceMoveResult> ResolveEnemyAndGetMoves()
-        {
-            var moves = new List<PieceMoveResult>();
-
-            // 來源棋子吹風（只吹範圍內的棋子）
-            foreach (var cell in board.AllCells())
-            {
-                var p = cell.OccupiedPiece as EnemyPiece;
-                if (p == null) continue;
-                Vector2Int dir = UtilsTool.DirectionToVector2Int(p.MoveDirection);
-
-                ApplyPieceMove(p, dir, moves);
-            }
-            
             HandleDeathQueue(moves);
             return moves;
         }
 
-        
-        
-        // ============================================================
-        // 共用風吹邏輯：移動、掉落、阻擋
-        // ============================================================
-
-        public bool ApplyPieceMove(Piece piece, Vector2Int windDir, List<PieceMoveResult> moves)
+        public List<PieceMoveResult> ResolveEnemyMoves()
         {
-            Vector2Int targetPos = piece.Position + windDir;
-            if (piece.Config.isObstacle)
+            var moves = new List<PieceMoveResult>();
+            foreach (var piece in board.AllEnemies())
             {
-                return false;
+                if (piece is EnemyPiece enemy)
+                    ApplyPieceMove(enemy, UtilsTool.DirectionToVector2Int(enemy.MoveDirection), moves);
             }
-            
+
+            HandleDeathQueue(moves);
+            return moves;
+        }
+
+        // ============================================================
+        // 共用邏輯：計算移動、掉落、阻擋
+        // ============================================================
+        public bool ApplyPieceMove(Piece piece, Vector2Int dir, List<PieceMoveResult> moves)
+        {
+            if (piece.Config.isObstacle || piece.IsFalling)
+                return false;
+
+            Vector2Int targetPos = piece.Position + dir;
             if (!board.CanMove(targetPos))
                 return false;
-            
-            // 已經掉落的棋子無法移動
-            if (piece.IsFalling)
-                return false;
 
-            
             bool isFalling = board.GetCellState(targetPos) == BoardManager.CellState.Hole;
-            
+
             moves.Add(new PieceMoveResult
             {
                 piece = piece,
@@ -129,46 +72,72 @@ namespace Core.Board
 
             return true;
         }
-        
-        // ============================================================
-        // 亡語註冊
-        // ============================================================
+
         public void RegisterFallingPiece(Piece p)
         {
             p.IsFalling = true;
             deathQueue.Add(p);
         }
 
-
-        public void HandleDeathQueue(List<PieceMoveResult> moves)
+        // ============================================================
+        // 死亡棋子亡語處理
+        // ============================================================
+        private void HandleDeathQueue(List<PieceMoveResult> moves)
         {
-            // 若有掉落 → 亡語風吹（全場）
             while (!deathQueue.IsEmpty)
             {
                 var deadPiece = deathQueue.Pop();
-                ResolveGlobalWind(deadPiece, moves);
+                if (deadPiece is WindPiece)
+                    EnqueueGlobalWind(deadPiece, moves);
             }
         }
-        
-        // ============================================================
-        // 3) 亡語風吹：整個場上所有棋子都吹 1 格
-        // ============================================================
-        private void ResolveGlobalWind(Piece sourceOfDeath, List<PieceMoveResult> moves)
+
+        private void EnqueueGlobalWind(Piece sourceOfDeath, List<PieceMoveResult> moves)
         {
-            if (!(sourceOfDeath is WindPiece wp))
-                return;
-
-            Vector2Int windDir = UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
-
-            var allPieces = BoardManager.Instance.GetAllPieces();
-
-            foreach (var piece in allPieces)
+            Vector2Int windDir = GetWindDirection(sourceOfDeath);
+            foreach (var piece in GetAllPieces())
             {
-                Debug.Log($"Global wind on {piece.name}");
-
-                PieceMovement.Instance.ApplyPieceMove(piece, windDir, moves);
-
+                ApplyPieceMove(piece, windDir, moves);
             }
+        }
+
+        // ============================================================
+        // 工具方法
+        // ============================================================
+        private Vector2Int GetWindDirection(Piece piece)
+        {
+            if (piece is WindPiece wp)
+                return UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
+            return Vector2Int.zero;
+        }
+
+        private IEnumerable<Piece> GetAllPieces() => board.GetAllPieces();
+
+        private IEnumerable<Piece> GetAllPiecesExcept(Piece exclude)
+        {
+            foreach (var p in board.GetAllPieces())
+                if (p != exclude && !p.Config.isObstacle)
+                    yield return p;
+        }
+
+        private void EnqueueDirectionalMoves(IEnumerable<Piece> pieces, Vector2Int origin, Vector2Int dir, List<PieceMoveResult> moves)
+        {
+            foreach (var piece in pieces)
+            {
+                if (!IsInDirectionRange(piece.Position, origin, dir))
+                    continue;
+
+                ApplyPieceMove(piece, dir, moves);
+            }
+        }
+
+        private bool IsInDirectionRange(Vector2Int pos, Vector2Int origin, Vector2Int dir)
+        {
+            if (dir == Vector2Int.right) return pos.x >= origin.x;
+            if (dir == Vector2Int.left)  return pos.x <= origin.x;
+            if (dir == Vector2Int.up)    return pos.y >= origin.y;
+            if (dir == Vector2Int.down)  return pos.y <= origin.y;
+            return false;
         }
     }
 }
