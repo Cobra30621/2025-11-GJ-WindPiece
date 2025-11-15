@@ -38,7 +38,7 @@ public class ChessInputController : MonoBehaviour
         // 可加入 WindSimulation 預覽
         // GameManager.Instance.PreviewPlacement(cell);
     }
-
+    
     private void HandleClick()
     {
         if (Mouse.current == null) return;
@@ -53,6 +53,13 @@ public class ChessInputController : MonoBehaviour
         var selectedPiece = PieceSelectionManager.Instance.SelectedPiece;
         if (selectedPiece == null) return;
 
-        GameManager.Instance.PlacePiece(selectedPiece, new Vector2Int(cell.x, cell.y));
+        bool success = GameManager.Instance.PlacePiece(selectedPiece, new Vector2Int(cell.x, cell.y));
+
+        if (success)
+        {
+            // 下成功 → 刪除 preview & 取消選擇
+            PieceSelectionManager.Instance.DestroyPreview();
+            PieceSelectionManager.Instance.DeselectPiece();
+        }
     }
 }

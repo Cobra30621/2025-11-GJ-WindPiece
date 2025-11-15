@@ -6,8 +6,10 @@ using Core.Utils;
 using Core.Wind;
 using Game.Core.Pieces;
 using Sirenix.OdinInspector;
+using UI.Main;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace Core.GameFlow
@@ -49,9 +51,9 @@ namespace Core.GameFlow
         }
 
         
-        public void PlacePiece(PieceConfig config, Vector2Int pos)
+        public bool PlacePiece(PieceConfig config, Vector2Int pos)
         {
-            if (CurrentState != GameState.PlayerTurn) return;
+            if (CurrentState != GameState.PlayerTurn) return false;
 
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);
@@ -61,6 +63,8 @@ namespace Core.GameFlow
             GameEventBus.OnPiecePlaced?.Invoke(piece);
             
             StartCoroutine(HandlePlaceAndResolve(piece));
+
+            return true;
         }
         
 
@@ -112,6 +116,28 @@ namespace Core.GameFlow
                 if (c.OccupiedPiece != null && c.OccupiedPiece.PieceType == PieceType.Enemy)
                     return;
             CurrentState = GameState.Win;
+            
+            // 顯示 UI
+            WinUIManager.Instance.ShowWin();
+
+            Debug.Log("YOU WIN!");
+        }
+        
+        public void RestartLevel()
+        {
+            Scene current = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(current.buildIndex);
+        }
+
+        public void LoadNextLevel()
+        {
+            Scene current = SceneManager.GetActiveScene();
+            int nextIndex = current.buildIndex + 1;
+
+            if (nextIndex >= SceneManager.sceneCountInBuildSettings)
+                nextIndex = 0; // 沒有下一關 → 回第一關
+
+            SceneManager.LoadScene(nextIndex);
         }
     }
 }
