@@ -9,8 +9,7 @@ public class PlacementPreviewManager : MonoBehaviour
 {
     public static PlacementPreviewManager Instance { get; private set; }
 
-    [Header("Board / Tilemap")]
-    public BoardManager board;
+    private BoardManager board => BoardManager.Instance;
     public Tilemap overlayTilemap;
     public TileBase canPlaceTile;
     public TileBase cannotPlaceTile;
@@ -120,9 +119,9 @@ public class PlacementPreviewManager : MonoBehaviour
 
         world.z = 0;
         
-        Debug.Log($"world {world}");
+        var offestPos = world - new Vector3(0.5f, 0.5f, 0);
 
-        return board.TryWorldToGrid(world, out gridPos) &&
+        return board.TryWorldToGrid(offestPos, out gridPos) &&
                board.IsInside(gridPos);
     }
 }

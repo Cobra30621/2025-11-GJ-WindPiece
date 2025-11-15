@@ -12,10 +12,6 @@ namespace Core.Input
         public PieceConfig SelectedPiece { get; private set; }
         public event Action<PieceConfig> OnSelectionChanged;
 
-        private GameObject previewInstance;    // 新增：預覽物件實例
-
-        [Header("Preview Settings")]
-        public GameObject previewPrefab;       // 設定要生成的預覽 prefab
         public Camera mainCamera;
 
         private void Awake()
@@ -50,19 +46,11 @@ namespace Core.Input
         {
             DestroyPreview(); // 保證不會重複
 
-            if (previewPrefab == null ) return;
-
-            previewInstance = Instantiate(previewPrefab);
-            previewInstance.GetComponent<PiecePreviewController>().SetPiece(SelectedPiece.image);
-            
             PlacementPreviewManager.Instance.StartPreview(SelectedPiece);
         }
 
         public void DestroyPreview()
         {
-            if (previewInstance != null)
-                Destroy(previewInstance);
-            
             PlacementPreviewManager.Instance.StopPreview();
         }
     }
