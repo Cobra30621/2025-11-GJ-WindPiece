@@ -6,10 +6,6 @@ public class TilemapSpawner : MonoBehaviour
 {
     public List<Tilemap> tilemaps;  
     public TilePrefabData tilePrefabData;
-    void Start()
-    {
-        SpawnPrefabs();
-    }
 
     public void SpawnPrefabs()
     {

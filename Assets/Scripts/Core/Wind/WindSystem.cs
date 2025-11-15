@@ -16,25 +16,22 @@ namespace Core.Wind
         // ============================================================
         private bool ApplyWindToPiece(Piece piece, Vector2Int windDir, List<PieceMoveResult> moves)
         {
+            Vector2Int targetPos = piece.Position + windDir;
             if (piece.Config.isObstacle)
+            {
                 return false;
-
+            }
+            
+            if (!board.CanMove(targetPos))
+                return false;
+            
             // 已經掉落的棋字無法移動
             if (piece.IsFalling)
                 return false;
 
-            Vector2Int targetPos = piece.Position + windDir;
-            bool isFalling = false;
-
-            if (board.IsHole(targetPos))
-            {
-                isFalling = true;
-            }
-            else if (board.ISObstacle(targetPos))
-            {
-                return false; // 被阻擋，不移動
-            }
-
+            
+            bool isFalling = board.GetCellState(targetPos) == BoardManager.CellState.Hole;
+            
             moves.Add(new PieceMoveResult
             {
                 piece = piece,
@@ -43,8 +40,7 @@ namespace Core.Wind
                 isFalling = isFalling
             });
 
-            board.RemovePiece(piece);
-            board.PlacePiece(piece, targetPos);
+            board.MovePiece(piece, targetPos);
 
             if (isFalling)
                 RegisterFallingPiece(piece);
@@ -83,7 +79,7 @@ namespace Core.Wind
             Vector2Int windDir = UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
             Vector2Int origin = source.Position;
 
-            var allPieces = PieceRegistry.Instance.GetAllPieces();
+            var allPieces = BoardManager.Instance.GetAllPieces();
 
             foreach (var piece in allPieces)
             {
@@ -117,7 +113,7 @@ namespace Core.Wind
 
             Vector2Int windDir = UtilsTool.DirectionToVector2Int(wp.Config.windDirection);
 
-            var allPieces = PieceRegistry.Instance.GetAllPieces();
+            var allPieces = BoardManager.Instance.GetAllPieces();
 
             foreach (var piece in allPieces)
             {

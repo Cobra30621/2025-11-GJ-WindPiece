@@ -7,7 +7,7 @@ namespace Core.Stage
     {
         public Tilemap boardTilemap;
         public Tilemap obstacleTilemap;
-        
-        
+
+        public TilemapSpawner TilemapSpawner;
     }
 }

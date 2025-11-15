@@ -30,6 +30,7 @@ namespace Core.Stage
 
             ChessInputController.Instance.boardTilemap = currentStage.boardTilemap;
             BoardManager.Instance.GenerateBoard(currentStage.boardTilemap);
+            currentStage.TilemapSpawner.SpawnPrefabs();
         }
     }
 }

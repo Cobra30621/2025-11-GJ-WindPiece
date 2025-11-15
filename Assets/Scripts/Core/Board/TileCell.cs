@@ -18,11 +18,7 @@ namespace Core.Board
             Type = type;
             OccupiedPiece = null;
         }
-
-        public bool IsWalkable()
-        {
-            return Type != TileType.Obstacle && OccupiedPiece == null;
-        }
+        
 
         public bool IsHole()
         {
