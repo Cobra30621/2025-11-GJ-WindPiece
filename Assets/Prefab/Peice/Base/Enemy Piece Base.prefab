@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7944426244664264925}
   - component: {fileID: 2706133174985887888}
   m_Layer: 0
-  m_Name: Wind Piece 1
+  m_Name: Enemy Piece Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5048281, g: 1, b: 0.11792451, a: 1}
+  m_Sprite: {fileID: -4287480883431494813, guid: 0001c48f1d1ec2e42be91f37361ab1cc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,6 +103,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ee10e8f60a4ee490275c2c804171c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core.Pieces.WindPiece
-  PieceType: 0
-  WindDirection: 3
-  WindRange: 3
+  PieceType: 1

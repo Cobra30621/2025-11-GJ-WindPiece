@@ -42,7 +42,6 @@ namespace Core.Wind
 
             var allPieces = PieceRegistry.Instance.GetAllPieces();
 
-            Debug.Log($"source start move: {source}");
             foreach (var piece in allPieces)
             {
                 if (piece == source) continue; // 不吹自己
@@ -69,19 +68,18 @@ namespace Core.Wind
                 // 掉入洞
                 // TODO 判定放在
                 Debug.Log($"get cell {targetPos}, {board.GetCell(targetPos)}");
-                if (targetCell == null )
+
+                if (board.IsHole(targetCell.Pos))
                 {
                     isFalling = true;
                 }
                 // 移動判定
-                else if ( targetCell.Type == TileType.Obstacle)
+                else if ( board.ISObstacle(targetCell.Pos))
                 {
                     // 無法移動，跳過
                     continue;
                 }
                 
-                
-
                 // 建立移動結果
                 var moveResult = new PieceMoveResult
                 {

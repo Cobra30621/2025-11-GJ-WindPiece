@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 856117388daa4772b75228700ad67990, type: 3}
-  m_Name: Up Wind Piece
+  m_Name: Down Wind Piece
   m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Pieces.PieceConfig
   pieceName: 
-  image: {fileID: -4025411565391583256, guid: ad01c56cdeef4d04ca19d50ee8bb5f3a, type: 3}
-  prefab: {fileID: 8158967242027800175, guid: 46528a6a252ee404a97c9c842ef5665d, type: 3}
-  windDirection: 0
+  image: {fileID: -775153409343369993, guid: fe4002946a28eeb43a6ad774824f32f9, type: 3}
+  prefab: {fileID: 5263307599557126888, guid: dfe6b7833c29741eeb6e70e1ffa4eac2, type: 3}
+  windDirection: 1
   windPower: 1
   isObstacle: 0
