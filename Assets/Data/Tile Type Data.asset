@@ -13,30 +13,6 @@ MonoBehaviour:
   m_Name: Tile Type Data
   m_EditorClassIdentifier: Assembly-CSharp::Core.Board.TileTypeData
   TileTypePairs:
-  - tile: {fileID: 11400000, guid: 74c35e0feeab43b43b7b64625f9e6021, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: f670718764c463142a0f9a4e89bf7ff8, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 1558ea7e937e35b42a92bd2e66b88f87, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 695c0540cbc6c6c45842a3b3c599e462, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 0e9ae6a566a537c4ab935dccdcb78aba, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: bf4040a52f21f0741a8bfc3e7b52eca1, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 7e1aa45225c77ba4ca26b72283518497, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: f35ae2be5c4826647bc3437a0866d24c, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 5b4692ae876892a48a35c503819f3b76, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 0dc9ab7e07eea984191c5d4b53c7018d, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 657ae8f655380a945a8816810e94c83e, type: 2}
-    type: 2
-  - tile: {fileID: 11400000, guid: 4d8dc394758bb114688d164fd0150d33, type: 2}
-    type: 2
   - tile: {fileID: 11400000, guid: 9b3084095f81cce4ca2dce969d7c507a, type: 2}
     type: 0
   - tile: {fileID: 11400000, guid: 7e3cc6b5ca03f674d8d8d84f2b120070, type: 2}
@@ -72,10 +48,4 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: 4951fab1b8c2d284baf02b2b27f9c80f, type: 2}
     type: 0
   - tile: {fileID: 11400000, guid: 2a25fcde13033274685e657a4154b963, type: 2}
-    type: 0
-  - tile: {fileID: 0}
-    type: 0
-  - tile: {fileID: 0}
-    type: 0
-  - tile: {fileID: 0}
     type: 0

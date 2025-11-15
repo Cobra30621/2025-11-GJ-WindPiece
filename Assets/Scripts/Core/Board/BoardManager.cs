@@ -73,8 +73,8 @@ namespace Core.Board
             var c = GetCell(p);
             return c != null && c.OccupiedPiece == null && c.Type != TileType.Obstacle;
         }
-        
-        /// <summary>
+
+/// <summary>
         /// 是障礙物
         /// </summary>
         /// <param name="p"></param>
@@ -128,6 +128,18 @@ namespace Core.Board
             
         }
         
+        public bool TryWorldToGrid(Vector3 worldPos, out Vector2Int gridPos)
+        {
+            gridPos = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
+            Debug.Log($"worldPos {worldPos} gridPos {gridPos}");
+            return true;
+        }
+
+        public bool CanPlaceAt(Vector2Int pos)
+        {
+            return true; // TODO: check tile is empty
+        }
+
         public IEnumerable<TileCell> AllCells() => cells.Values;
     }
 }
