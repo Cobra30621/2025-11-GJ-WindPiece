@@ -11,8 +11,7 @@ namespace Game.Core.Pieces
         public GameObject prefab;
 
         public Direction windDirection;
-        public int windPower = 1;
-
+        
         public bool isObstacle;
     }
 }

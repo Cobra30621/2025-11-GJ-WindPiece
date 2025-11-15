@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core.Pieces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 public class TilemapSpawner : MonoBehaviour
@@ -29,8 +30,9 @@ public class TilemapSpawner : MonoBehaviour
                 {
                     if (tile == pair.tile && pair.prefab != null)
                     {
-                        GameObject ob = Instantiate(pair.prefab, transform);
-                        ob.transform.position = map.GetCellCenterWorld(pos);
+                        // GameObject ob = Instantiate(pair.prefab, transform);
+                        // ob.transform.position = map.GetCellCenterWorld(pos);
+                        PieceFactory.Instance.Spawn(pair.prefab, pair.pieceConfig, new Vector2Int(pos.x, pos.y));
                         break; // 避免重複匹配
                     }
                 }

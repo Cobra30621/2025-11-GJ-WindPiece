@@ -1,11 +1,13 @@
 using Core.Utils;
 using Game.Core.Pieces;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Core.Pieces
 {
     public abstract class Piece : MonoBehaviour
     {
+        [ReadOnly]
         public PieceType PieceType;
         public Vector2Int Position { get; set; }
         public int SpawnOrder { get; set; } // 用於亡語優先序
