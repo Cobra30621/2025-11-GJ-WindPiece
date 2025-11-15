@@ -69,12 +69,12 @@ namespace Core.Wind
                 // TODO 判定放在
                 Debug.Log($"get cell {targetPos}, {board.GetCell(targetPos)}");
 
-                if (board.IsHole(targetCell.Pos))
+                if (board.IsHole(targetPos))
                 {
                     isFalling = true;
                 }
                 // 移動判定
-                else if ( board.ISObstacle(targetCell.Pos))
+                else if ( board.ISObstacle(targetPos))
                 {
                     // 無法移動，跳過
                     continue;
