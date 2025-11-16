@@ -1330,6 +1330,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
+      propertyPath: pieceUsageList.Array.data[4].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[0].config
       value: 
       objectReference: {fileID: 11400000, guid: a9503b62df7f942c1bbaff47683a3a37, type: 2}
