@@ -83,29 +83,34 @@ public class PlacementPreviewManager : MonoBehaviour
         previewPieceRoot.SetActive(true);
         previewPieceRoot.transform.position = Board.GridToWorld(pos);
 
-        UpdatePlacementTiles();
+        UpdatePlacementTiles(pos);
         UpdateEffectRangeTiles(pos);
     }
 
     // ======================================================
     // 顯示可放置 / 不可放置 TileMap
     // ======================================================
-    private void UpdatePlacementTiles()
+    private void UpdatePlacementTiles(Vector2Int pos)
     {
         overlayTilemap.ClearAllTiles();
 
-        foreach (TileCell cell in Board.AllCells())
-        {
-            var tilePos = new Vector3Int(cell.Pos.x, cell.Pos.y, 0);
-            var tile = cell.CanAddPiece() ? canPlaceTile : cannotPlaceTile;
-            // 如果鎖定中，無法放置
-            if (!PieceSelectionManager.Instance.CanPlacePiece())
-            {
-                tile = cannotPlaceTile;
-            }
-            
-            overlayTilemap.SetTile(tilePos, tile);
-        }
+        var cell = Board.GetCell(pos);
+        var tile = cell.CanAddPiece() ? canPlaceTile : cannotPlaceTile;
+        overlayTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), tile);
+
+        // 所有區間都顯示
+        // foreach (TileCell cell in Board.AllCells())
+        // {
+        //     var tilePos = new Vector3Int(cell.Pos.x, cell.Pos.y, 0);
+        //     var tile = cell.CanAddPiece() ? canPlaceTile : cannotPlaceTile;
+        //     // 如果鎖定中，無法放置
+        //     if (!PieceSelectionManager.Instance.CanPlacePiece())
+        //     {
+        //         tile = cannotPlaceTile;
+        //     }
+        //     
+        //     overlayTilemap.SetTile(tilePos, tile);
+        // }
     }
 
     // ======================================================

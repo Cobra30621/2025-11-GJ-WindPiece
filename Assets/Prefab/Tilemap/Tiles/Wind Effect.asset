@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wind Effect
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
   m_Sprite: {fileID: 7482667652216324306, guid: 52ae1258d2a1d47b9b8ccbe01e3c220e, type: 3}
-  m_Color: {r: 0.972549, g: 0.7616255, b: 0, a: 0.48235294}
+  m_Color: {r: 0, g: 0.27330148, b: 0.972549, a: 0.48235294}
   m_Transform:
     e00: 1
     e01: 0
