@@ -717,8 +717,13 @@ PrefabInstance:
       propertyPath: 'dialogue.Array.data[7]'
       value: "\u4E45\u9055\u7684\u6D3E\u4E0A\u4E86\u7528\u5834\uFF0C\u88AB\u6307\u540D\u524D\u53BB\u9032\u884C\u8ABF\u67E5\u2026\u2026 "
       objectReference: {fileID: 0}
+    - target: {fileID: 8964061243203641397, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3745037601131475673, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
