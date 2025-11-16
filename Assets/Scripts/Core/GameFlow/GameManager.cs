@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Board;
+using Core.Input;
 using Core.Pieces;
 using Core.Utils;
 using Core.Wind;
@@ -44,13 +45,13 @@ namespace Core.GameFlow
 
         public void StartGame()
         {
-            CurrentState = GameState.PlayerTurn;
-            GameEventBus.OnTurnStart_Player?.Invoke();
+            StartPlayerTurn();
         }
 
         public void StartPlayerTurn()
         {
             CurrentState = GameState.PlayerTurn;
+            // PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
             GameEventBus.OnTurnStart_Player?.Invoke();
         }
 
@@ -60,6 +61,9 @@ namespace Core.GameFlow
             if (CurrentState != GameState.PlayerTurn) return false;
 
             if (!BoardManager.Instance.CanAddPiece(pos)) return false;
+            
+            // Lock Player 
+            // PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockPlacement);
             
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);

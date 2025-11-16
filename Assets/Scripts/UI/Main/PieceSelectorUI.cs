@@ -30,6 +30,7 @@ namespace UI.Main
             public Button button;
         }
 
+        [ShowInInspector]
         private PieceButtonSlot currentSelectedSlot = null;
         
 
@@ -79,6 +80,8 @@ namespace UI.Main
 
         private void OnClickedSlot(PieceButtonSlot slot)
         {
+            if(!PieceSelectionManager.Instance.CanSelectPiece()) return;
+            
             currentSelectedSlot = slot;
 
             // 通知 SelectionManager

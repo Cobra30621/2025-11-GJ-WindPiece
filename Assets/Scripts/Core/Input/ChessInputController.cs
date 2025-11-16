@@ -51,6 +51,8 @@ public class ChessInputController : MonoBehaviour
         Vector3Int cell = boardTilemap.WorldToCell(world);
         if (!boardTilemap.HasTile(cell)) return;
 
+        if (!PieceSelectionManager.Instance.CanPlacePiece()) return;
+        
         var selectedPiece = PieceSelectionManager.Instance.SelectedPiece;
         if (selectedPiece == null) return;
 

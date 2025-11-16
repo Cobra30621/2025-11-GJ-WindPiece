@@ -1,3 +1,4 @@
+using Core.Input;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
@@ -35,6 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Show()
     {
+        PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockAll);
         index = 0;
         isShowing = true;
 
@@ -57,6 +59,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Close()
     {
+        PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
         isShowing = false;
         panel.SetActive(false);
     }
