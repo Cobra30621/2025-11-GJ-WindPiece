@@ -27,7 +27,7 @@ namespace Core.GameFlow
         
         private int spawnCounter = 0;
           
-        public List<PieceMoveResult> moves = new List<PieceMoveResult>();
+        public List<MovementEvent> moveEvents = new List<MovementEvent>();
 
         
         public event Action<PieceConfig> OnPiecePlaced;
@@ -97,8 +97,9 @@ namespace Core.GameFlow
             GameEventBus.OnWindStart?.Invoke();
 
             // windSystem.Resolve returns sequence of moves to play
-            moves = PieceMovement.Instance.ResolveWindMoves(piece);
-         
+            moveEvents = PieceMovement.Instance.ResolveWindMoves(piece);
+            var moves = PieceMovement.FlattenMovementEvents(moveEvents);
+            
             yield return animator.PlayMoves(moves);
 
             GameEventBus.OnWindEnd?.Invoke();
@@ -111,7 +112,9 @@ namespace Core.GameFlow
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
 
-            moves = PieceMovement.Instance.ResolveEnemyMoves();
+            moveEvents = PieceMovement.Instance.ResolveEnemyMoves();
+            var moves = PieceMovement.FlattenMovementEvents(moveEvents);
+            
             yield return animator.PlayMoves(moves);
 
             // 检查胜负并回到玩家回合

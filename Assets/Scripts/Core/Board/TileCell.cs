@@ -35,6 +35,11 @@ namespace Core.Board
 
         public CellState GetCellState()
         {
+            if (Type == TileType.Hole)
+            {
+                return CellState.Hole;
+            }
+            
             if (OccupiedPiece != null)
             {
                 if (OccupiedPiece.Config.isObstacle)
@@ -43,14 +48,14 @@ namespace Core.Board
                 }
                 else
                 {
+                    if (OccupiedPiece.IsFalling)
+                    {
+                        return CellState.Empty;
+                    }
                     return CellState.Piece;
                 }
             }
-
-            if (Type == TileType.Hole)
-            {
-                return CellState.Hole;
-            }
+            
 
             return CellState.Empty;
         }

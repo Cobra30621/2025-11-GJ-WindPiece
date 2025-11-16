@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Core.Board
 {
-    public class PieceMovement : MonoBehaviour
+    public partial class PieceMovement : MonoBehaviour
     {
         public static PieceMovement Instance { get; private set; }
         private BoardManager board => BoardManager.Instance;
@@ -19,37 +19,55 @@ namespace Core.Board
         }
 
         // ============================================================
-        // 公共方法：取得 Wind 或 Enemy 移動結果
+        // Movement Event
         // ============================================================
-        public List<PieceMoveResult> ResolveWindMoves(Piece source)
+
+        // ============================================================
+        // 對外介面：風 / 敵人移動
+        // ============================================================
+        public List<MovementEvent> ResolveWindMoves(Piece source)
         {
-            var moves = new List<PieceMoveResult>();
+            var events = new List<MovementEvent>();
+            Vector2Int dir = GetWindDirection(source);
+
+            var evt = new MovementEvent(source, dir);
+            events.Add(evt);
+
             if (source is WindPiece)
-                EnqueueDirectionalMoves(GetAllPiecesExcept(source).ToList(), source.Position, GetWindDirection(source), moves);
-
-            HandleDeathQueue(moves);
-            return moves;
-        }
-
-        public List<PieceMoveResult> ResolveEnemyMoves()
-        {
-            var moves = new List<PieceMoveResult>();
-            foreach (var piece in board.AllEnemies())
             {
-                if (piece is EnemyPiece enemy)
-                {
-                    if(enemy.canMove)
-                        ApplyPieceMove(enemy, UtilsTool.DirectionToVector2Int(enemy.MoveDirection), moves);
-                }
-                    
+                var pieces = GetAllPiecesExcept(source).ToList();
+                EnqueueDirectionalMoves(pieces, source.Position, dir, evt.moves);
             }
 
-            HandleDeathQueue(moves);
-            return moves;
+            // 包含因死亡觸發的所有事件
+            events.AddRange(HandleDeathQueue());
+
+            return events;
+        }
+
+        public List<MovementEvent> ResolveEnemyMoves()
+        {
+            var events = new List<MovementEvent>();
+
+            // 主事件（敵人群體移動）
+            var mainEvt = new MovementEvent(null, Vector2Int.zero);
+            events.Add(mainEvt);
+
+            foreach (var piece in board.AllEnemies())
+            {
+                if (piece is EnemyPiece enemy && enemy.canMove)
+                {
+                    Vector2Int dir = UtilsTool.DirectionToVector2Int(enemy.MoveDirection);
+                    ApplyPieceMove(enemy, dir, mainEvt.moves);
+                }
+            }
+
+            events.AddRange(HandleDeathQueue());
+            return events;
         }
 
         // ============================================================
-        // 共用邏輯：計算移動、掉落、阻擋
+        // 移動邏輯
         // ============================================================
         public bool ApplyPieceMove(Piece piece, Vector2Int dir, List<PieceMoveResult> moves)
         {
@@ -57,6 +75,7 @@ namespace Core.Board
                 return false;
 
             Vector2Int targetPos = piece.Position + dir;
+            // Debug.Log($"Apply Move {piece.name} from {piece.Position} add {dir} {board.CanMove(targetPos)}");
             if (!board.CanMove(targetPos))
                 return false;
 
@@ -85,30 +104,43 @@ namespace Core.Board
         }
 
         // ============================================================
-        // 死亡棋子亡語處理
+        // 死亡亡語 -> GlobalWind
         // ============================================================
-        private void HandleDeathQueue(List<PieceMoveResult> moves)
+        private List<MovementEvent> HandleDeathQueue()
         {
+            var resultEvents = new List<MovementEvent>();
+
             while (!deathQueue.IsEmpty)
             {
                 var deadPiece = deathQueue.Pop();
+
                 if (deadPiece is WindPiece || deadPiece is EnemyPiece)
-                    EnqueueGlobalWind(deadPiece, moves);
+                {
+                    var globalEvt = TriggerGlobalWind(deadPiece);
+                    resultEvents.Add(globalEvt);
+                }
             }
+
+            return resultEvents;
         }
 
-        private void EnqueueGlobalWind(Piece sourceOfDeath, List<PieceMoveResult> moves)
+        private MovementEvent TriggerGlobalWind(Piece sourceOfDeath)
         {
-            
             Vector2Int windDir = GetWindDirection(sourceOfDeath);
-            Debug.Log($"EnqueueGlobalWind: {sourceOfDeath.name} {windDir}");
+
+            var evt = new MovementEvent(sourceOfDeath, windDir);
+
             var pieces = GetAllPieces().ToList();
-            PieceSorter.SortByDirection( pieces, windDir); 
-            
+            PieceSorter.SortByDirection(pieces, windDir);
+
+            // Debug.Log($"Trigger Global Move {sourceOfDeath.name}");
             foreach (var piece in pieces)
             {
-                ApplyPieceMove(piece, windDir, moves);
+                // Debug.Log($"Move {piece.name}: {piece.Position} + {windDir}");
+                ApplyPieceMove(piece, windDir, evt.moves);
             }
+
+            return evt;
         }
 
         // ============================================================
@@ -135,7 +167,7 @@ namespace Core.Board
         private void EnqueueDirectionalMoves(List<Piece> pieces, Vector2Int origin, Vector2Int dir, List<PieceMoveResult> moves)
         {
             PieceSorter.SortByDirection(pieces, dir);
-            
+
             foreach (var piece in pieces)
             {
                 if (!IsInDirectionRange(piece.Position, origin, dir))
@@ -152,6 +184,16 @@ namespace Core.Board
             if (dir == Vector2Int.up)    return pos.y >= origin.y;
             if (dir == Vector2Int.down)  return pos.y <= origin.y;
             return false;
+        }
+        
+        public static List<PieceMoveResult> FlattenMovementEvents(List<MovementEvent> events)
+        {
+            var allMoves = new List<PieceMoveResult>();
+            foreach (var evt in events)
+            {
+                allMoves.AddRange(evt.moves);
+            }
+            return allMoves;
         }
     }
 }
