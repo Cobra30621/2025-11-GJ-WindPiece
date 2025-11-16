@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Down Wind Piece
   m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Pieces.PieceConfig
   pieceName: "\u5F80\u4E0B\u5439"
+  description: "\u5F80\u4E0B\u5439"
   image: {fileID: -775153409343369993, guid: fe4002946a28eeb43a6ad774824f32f9, type: 3}
   prefab: {fileID: 5263307599557126888, guid: dfe6b7833c29741eeb6e70e1ffa4eac2, type: 3}
   windDirection: 1

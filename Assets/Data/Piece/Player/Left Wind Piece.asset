@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Left Wind Piece
   m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Pieces.PieceConfig
   pieceName: "\u5F80\u5DE6\u5439"
+  description: "\u5F80\u5DE6\u5439"
   image: {fileID: -5928048621165786049, guid: 3d4c2fa21ab66334e89ed7633d3c97f1, type: 3}
   prefab: {fileID: 5263307599557126888, guid: 97c5d54dfc64a42d49d4dba7af84234f, type: 3}
   windDirection: 2

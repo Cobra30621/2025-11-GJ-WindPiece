@@ -83,6 +83,10 @@ namespace UI.Main
 
             var text = btn.GetComponentInChildren<TextMeshProUGUI>();
             if (text != null) text.text = config.pieceName;
+            
+            // 設定 Tool Tip
+            var tooltipTrigger = btn.GetComponent<TooltipTrigger>();
+            if (tooltipTrigger != null) tooltipTrigger.message = config.description;
 
             var slot = new PieceButtonSlot
             {
