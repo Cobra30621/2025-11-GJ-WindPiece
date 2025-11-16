@@ -46,6 +46,8 @@ namespace Core.GameFlow
 
         private IEnumerator StartPlayerTurn()
         {
+            if (IsGameEnd()) yield return null;
+            
             CurrentState = GameState.PlayerTurn;
             StartCoroutine(ShowTextBox.Instance.Show("玩家行動"));
             yield return null;
@@ -108,6 +110,7 @@ namespace Core.GameFlow
 
         IEnumerator HandleEnemyTurn()
         {
+            if (IsGameEnd()) yield return null;
             yield return ShowTextBox.Instance.Show("敵人行動");
 
             CurrentState = GameState.EnemyTurn;
@@ -148,6 +151,11 @@ namespace Core.GameFlow
             WinUIManager.Instance.ShowWin();
 
             Debug.Log("YOU WIN!");
+        }
+
+        private bool IsGameEnd()
+        {
+            return CurrentState == GameState.Win || CurrentState == GameState.Lose;
         }
         
         public void RestartLevel()

@@ -8,5 +8,6 @@ namespace Core.Audio
         LevelClear,     // 過關
         PlacePiece,      // 放置棋子
         Talk, // 對話
+        Lose,
     }
 }

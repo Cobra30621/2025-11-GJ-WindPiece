@@ -33,3 +33,6 @@ MonoBehaviour:
   - type: 5
     clips:
     - {fileID: 8300000, guid: 02773462b190e4acfba1497dc49a0dd6, type: 3}
+  - type: 6
+    clips:
+    - {fileID: 8300000, guid: 9aebe4dae061640319aba2229460b468, type: 3}
