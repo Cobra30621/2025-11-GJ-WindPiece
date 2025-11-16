@@ -75,6 +75,23 @@ namespace Core.Board
         public TileCell GetCell(Vector2Int p) => cells.TryGetValue(p, out var cell) ? cell : null;
         public IEnumerable<TileCell> AllCells() => cells.Values;
 
+
+        public bool HaveMovableEnemies()
+        {
+            var enemies = AllEnemies();
+
+            foreach (var piece in enemies)
+            {
+                if(piece is EnemyPiece enemy)
+                    if (enemy.canMove)
+                    {
+                        return true;
+                    }
+            }
+
+            return false;
+        }
+        
         public List<Piece> AllEnemies()
         {
             return pieces.FindAll(p => p is EnemyPiece);
