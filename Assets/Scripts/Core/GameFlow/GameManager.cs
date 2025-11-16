@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Audio;
 using Core.Board;
 using Core.Input;
 using Core.Pieces;
@@ -72,6 +73,7 @@ namespace Core.GameFlow
 
             GameEventBus.OnPiecePlaced?.Invoke(piece);
             
+            SFXManager.Instance.PlaySFX(SFXType.PlacePiece);
             StartCoroutine(HandlePlaceAndResolve(piece));
 
             return true;
@@ -100,6 +102,7 @@ namespace Core.GameFlow
             moveEvents = PieceMovement.Instance.ResolveWindMoves(piece);
             var moves = PieceMovement.FlattenMovementEvents(moveEvents);
             
+            SFXManager.Instance.PlaySFX(SFXType.Wind);
             yield return animator.PlayMoves(moves);
 
             GameEventBus.OnWindEnd?.Invoke();

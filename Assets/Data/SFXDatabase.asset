@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4748892a65554a0b89ed3e9d23cb8fa9, type: 3}
+  m_Name: SFXDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::Core.Audio.SFXDatabase
+  sounds:
+  - type: 0
+    clip: {fileID: 8300000, guid: 174bc64a2fa14437da708433c196312a, type: 3}
+  - type: 1
+    clip: {fileID: 8300000, guid: 75ad37026044e428ea9e785672dd75fa, type: 3}
+  - type: 2
+    clip: {fileID: 8300000, guid: 6af626a06029d4f6aa14417dbdeb4aca, type: 3}
+  - type: 3
+    clip: {fileID: 8300000, guid: 71a90f3c1c812460ba7f712b0660d174, type: 3}
+  - type: 4
+    clip: {fileID: 8300000, guid: 6af626a06029d4f6aa14417dbdeb4aca, type: 3}

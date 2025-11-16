@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Core.Audio;
 using Core.Board;
 using Core.GameFlow;
 using Core.Pieces;
@@ -31,6 +32,8 @@ namespace Core.Wind
                 Vector3 from = CellToWorld(m.from);
                 Vector3 to = CellToWorld(m.to);
                 float t = 0;
+                
+                SFXManager.Instance.PlaySFX(SFXType.Move);
                 while (t < durationPerMove)
                 {
                     t += Time.deltaTime;
