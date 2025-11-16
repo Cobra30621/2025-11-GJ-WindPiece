@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 501e89f69dc30064fade67a865d01165
+guid: 0ca24431a13130a45b59053f86c003e1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2453241878460654638
-    second: BG_CloudOnly_0
-  - first:
-      213: 2866219737590538530
-    second: BG_CloudOnly_1
-  - first:
-      213: 3488637157354444306
-    second: BG_CloudOnly_2
+      213: 2989130392136931142
+    second: BG_Void_E_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -57,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -106,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BG_CloudOnly_0
+      name: BG_Void_E_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2db9d36628554fdd0800000000000000
-      internalID: -2453241878460654638
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BG_CloudOnly_1
-      rect:
-        serializedVersion: 2
-        x: 46
-        y: 40
-        width: 18
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2212c4b5aabd6c720800000000000000
-      internalID: 2866219737590538530
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BG_CloudOnly_2
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 33
-        width: 10
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2161752d2012a6030800000000000000
-      internalID: 3488637157354444306
+      spriteID: 64755aa21468b7920800000000000000
+      internalID: 2989130392136931142
       vertices: []
       indices: 
       edges: []
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BG_CloudOnly_0: -2453241878460654638
-      BG_CloudOnly_1: 2866219737590538530
-      BG_CloudOnly_2: 3488637157354444306
+      BG_Void_E_0: 2989130392136931142
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
