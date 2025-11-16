@@ -64,35 +64,24 @@ public class PlacementPreviewManager : MonoBehaviour
 
     private void UpdateHoverPreview()
     {
-        if (!TryGetHoverCell(out Vector2Int cellPos)) return;
-
+        if (!TryGetHoverCell(out Vector2Int cellPos))
+        {
+            previewPieceRoot.SetActive(false);
+            return;
+        }
+        else
+        {
+            previewPieceRoot.SetActive(true);
+        }
+        
         // 移動透明棋子
         previewPieceRoot.transform.position = board.GridToWorld(cellPos);
-
-        // // 判斷是否可放置
-        // bool canPlace = board.CanAddPiece(cellPos);
-        //
-        // overlayTilemap.ClearAllTiles();
-        //
-        // Vector3Int tilePos = new Vector3Int(cellPos.x, cellPos.y, 0);
-        // overlayTilemap.SetTile(tilePos, overlayTile);
-        //
-        // if (canPlace)
-        // {
-        //     overlayTilemap.SetColor(tilePos, canPlaceColor);
-        // }
-        // else
-        // {
-        //     overlayTilemap.SetColor(tilePos, cannotPlaceColor);
-        // }
-        //
+        
         overlayTilemap.ClearAllTiles();
 
         foreach (TileCell cell in board.AllCells())
         {
             Vector3Int tilePos = new Vector3Int(cell.Pos.x, cell.Pos.y, 0);
-
-            
 
             if (cell.CanAddPiece())
             {

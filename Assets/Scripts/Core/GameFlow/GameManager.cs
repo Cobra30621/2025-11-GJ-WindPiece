@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Board;
@@ -27,6 +28,9 @@ namespace Core.GameFlow
           
         public List<PieceMoveResult> moves = new List<PieceMoveResult>();
 
+        
+        public event Action<PieceConfig> OnPiecePlaced;
+        
         void Awake()
         {
             Instance = this;

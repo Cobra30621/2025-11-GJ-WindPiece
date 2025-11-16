@@ -1,18 +1,19 @@
 using Core.Board;
 using Core.GameFlow;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Stage
 {
     public class StageManager : MonoBehaviour
     {
-        public static StageManager instance;
+        public static StageManager Instance;
 
         public Stage currentStageInstance;
 
         private void Awake()
         {
-            instance = this;
+            Instance = this;
         }
 
         private void Start()

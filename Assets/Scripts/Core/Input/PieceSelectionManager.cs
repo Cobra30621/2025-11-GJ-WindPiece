@@ -11,6 +11,7 @@ namespace Core.Input
         
         public PieceConfig SelectedPiece { get; private set; }
         public event Action<PieceConfig> OnSelectionChanged;
+        
 
         public Camera mainCamera;
 
