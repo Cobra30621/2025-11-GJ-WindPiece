@@ -3231,7 +3231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[2].count
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[0].config

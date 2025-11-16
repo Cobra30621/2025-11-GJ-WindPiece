@@ -49,7 +49,7 @@ namespace Core.GameFlow
             if (IsGameEnd()) yield return null;
             
             CurrentState = GameState.PlayerTurn;
-            StartCoroutine(ShowTextBox.Instance.Show("玩家行動"));
+            // StartCoroutine(ShowTextBox.Instance.Show("玩家行動"));
             yield return null;
             
             PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
