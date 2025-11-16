@@ -1,3 +1,4 @@
+using Core.Audio;
 using Core.GameFlow;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ namespace UI.Main
         /// </summary>
         public void ShowLose()
         {
+            SFXManager.Instance.PlaySFX(SFXType.Lose);
             if (losePanel != null)
                 losePanel.SetActive(true);
         }
