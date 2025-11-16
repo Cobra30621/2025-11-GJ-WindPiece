@@ -51,7 +51,7 @@ namespace Core.GameFlow
         public void StartPlayerTurn()
         {
             CurrentState = GameState.PlayerTurn;
-            // PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
             GameEventBus.OnTurnStart_Player?.Invoke();
         }
 
@@ -63,7 +63,7 @@ namespace Core.GameFlow
             if (!BoardManager.Instance.CanAddPiece(pos)) return false;
             
             // Lock Player 
-            // PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockPlacement);
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockPlacement);
             
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);
@@ -109,6 +109,8 @@ namespace Core.GameFlow
 
         IEnumerator HandleEnemyTurn()
         {
+            yield return new WaitForSeconds(0.5f);
+            
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
 
