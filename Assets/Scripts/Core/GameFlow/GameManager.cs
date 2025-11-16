@@ -55,6 +55,8 @@ namespace Core.GameFlow
         {
             if (CurrentState != GameState.PlayerTurn) return false;
 
+            if (!BoardManager.Instance.CanAddPiece(pos)) return false;
+            
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);
             piece.SpawnOrder = ++spawnCounter;
