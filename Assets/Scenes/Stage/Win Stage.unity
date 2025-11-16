@@ -230,7 +230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533578565}
-  - component: {fileID: 533578564}
+  - component: {fileID: 533578566}
   m_Layer: 0
   m_Name: ResultManager
   m_TagString: Untagged
@@ -238,19 +238,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &533578564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533578563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03c22f9b5b59c344816234348d86449, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ResultManager
-  titleSceneName: Mainmenu
 --- !u!4 &533578565
 Transform:
   m_ObjectHideFlags: 0
@@ -266,6 +253,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &533578566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533578563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03c22f9b5b59c344816234348d86449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResultManager
+  titleSceneName: Mainmenu
+  display: {fileID: 1088177069}
+  groups:
+  - frames:
+    - {fileID: 8053899242462091416, guid: 6b3d1747fcdda8341bc1d71017e14c78, type: 3}
+    - {fileID: 4653932814348791077, guid: 849178ba3a75853449f75411d7d825e8, type: 3}
+    - {fileID: 690243772044861111, guid: a9f70b2cfc2965c4c9bd8e686f32b9cb, type: 3}
+    - {fileID: 284314508137338092, guid: ffe6c666e98bf7f46bcb2bea546bb5db, type: 3}
+  - frames:
+    - {fileID: -6360116305524664329, guid: 4e753f581bb73ba40a2f08be9291ee58, type: 3}
+    - {fileID: 5858479730459764560, guid: f0a10580e4abe434383b05d0e2fe3371, type: 3}
+    - {fileID: -5389705431057896473, guid: 22f97ae3bf083824680826c03591ac17, type: 3}
+    - {fileID: 2563678291145274914, guid: 95da5ed222b65c64d857d40244f2b036, type: 3}
+  - frames:
+    - {fileID: 4349194590612477393, guid: 5757089f48832054388524a0fd2019a3, type: 3}
+    - {fileID: 8685835791614800407, guid: 84f01896a6a0b614aa20dd7b9a37ff24, type: 3}
+    - {fileID: 5299924407541326493, guid: 1f41b3eb2ec52004abe86f5a577ae224, type: 3}
+  - frames:
+    - {fileID: 3373621494162894196, guid: 577c27c8d84c729449bff27761dca8bf, type: 3}
+    - {fileID: -1371252455819440678, guid: 88264a1e13734f148bef6a5bb7b9200f, type: 3}
+    - {fileID: -3926387587215527241, guid: 3a405a56747e14045be9bf41f0dc37f9, type: 3}
+  frameTime: 0.1
+  groupDuration: 2
 --- !u!1 &565213209
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 8053899242462091416, guid: 6b3d1747fcdda8341bc1d71017e14c78, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
