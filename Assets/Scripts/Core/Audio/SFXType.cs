@@ -6,6 +6,7 @@ namespace Core.Audio
         EnemyDeath,     // 敵人死亡
         Move,      // 棋子移動
         LevelClear,     // 過關
-        PlacePiece      // 放置棋子
+        PlacePiece,      // 放置棋子
+        Talk, // 對話
     }
 }

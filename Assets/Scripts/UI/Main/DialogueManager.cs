@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System;
+using Core.Audio;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class DialogueManager : MonoBehaviour
 
         panel.SetActive(true);
         dialogueText.text = dialogue[index];
+        SFXManager.Instance.PlaySFX(SFXType.Talk);
     }
 
     public void Next()
@@ -59,6 +61,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        SFXManager.Instance.PlaySFX(SFXType.Talk);
         dialogueText.text = dialogue[index];
     }
 

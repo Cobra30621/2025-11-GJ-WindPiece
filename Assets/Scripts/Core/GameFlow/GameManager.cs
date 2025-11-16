@@ -100,7 +100,6 @@ namespace Core.GameFlow
 
             moveEvents = PieceMovement.Instance.ResolveWindMoves(piece);
     
-            SFXManager.Instance.PlaySFX(SFXType.Wind);
             yield return animator.PlayMoves(moveEvents);
 
             GameEventBus.OnWindEnd?.Invoke();
@@ -111,7 +110,7 @@ namespace Core.GameFlow
 
         IEnumerator HandleEnemyTurn()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
 
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();

@@ -30,7 +30,7 @@ namespace Core.Board
             var events = new List<MovementEvent>();
             Vector2Int dir = GetWindDirection(source);
 
-            var evt = new MovementEvent(source, dir);
+            var evt = new MovementEvent(source, dir, true);
             events.Add(evt);
 
             if (source is WindPiece)
@@ -50,7 +50,7 @@ namespace Core.Board
             var events = new List<MovementEvent>();
 
             // 主事件（敵人群體移動）
-            var mainEvt = new MovementEvent(null, Vector2Int.zero);
+            var mainEvt = new MovementEvent(null, Vector2Int.zero, false);
             events.Add(mainEvt);
 
             foreach (var piece in board.AllEnemies())
@@ -128,7 +128,7 @@ namespace Core.Board
         {
             Vector2Int windDir = GetWindDirection(sourceOfDeath);
 
-            var evt = new MovementEvent(sourceOfDeath, windDir);
+            var evt = new MovementEvent(sourceOfDeath, windDir, true);
 
             var pieces = GetAllPieces().ToList();
             PieceSorter.SortByDirection(pieces, windDir);

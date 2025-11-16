@@ -27,7 +27,8 @@ namespace Core.Wind
             foreach (var ev in events)
             {
                 if (ev.moves == null) continue;
-                SFXManager.Instance.PlaySFX(SFXType.Wind);
+                if(ev.IsWind)
+                    SFXManager.Instance.PlaySFX(SFXType.Wind);
                 
                 yield return new WaitForSeconds(0.2f);
 
@@ -66,7 +67,7 @@ namespace Core.Wind
                     yield return null;
                 }
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
             }
 
             yield return new WaitForSeconds(0.5f);

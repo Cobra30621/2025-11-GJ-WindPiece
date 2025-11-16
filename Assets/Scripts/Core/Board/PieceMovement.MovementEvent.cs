@@ -12,11 +12,14 @@ namespace Core.Board
         public Piece source;
         public Vector2Int direction;
         public List<PieceMoveResult> moves = new List<PieceMoveResult>();
-
-        public MovementEvent(Piece s, Vector2Int dir)
+        public bool IsWind;
+        
+        
+        public MovementEvent(Piece s, Vector2Int dir, bool isWind)
         {
             source = s;
             direction = dir;
+            IsWind = isWind;
         }
     }
 }
