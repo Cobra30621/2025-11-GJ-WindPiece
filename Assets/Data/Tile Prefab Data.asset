@@ -43,9 +43,6 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: f670718764c463142a0f9a4e89bf7ff8, type: 2}
     prefab: {fileID: 2089060925281772121, guid: fd32d3d0851d1bc45a365947c8436fb4, type: 3}
     pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
-  - tile: {fileID: 11400000, guid: 1558ea7e937e35b42a92bd2e66b88f87, type: 2}
-    prefab: {fileID: 2089060925281772121, guid: b20a3050f615a5949acf7eb6c56e37d4, type: 3}
-    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
   - tile: {fileID: 11400000, guid: f35ae2be5c4826647bc3437a0866d24c, type: 2}
     prefab: {fileID: 2089060925281772121, guid: 176a67f542fca54449fdc6683cbb830b, type: 3}
     pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
@@ -79,15 +76,6 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: 5efee970d6d11b54cafa19d27ac32a53, type: 2}
     prefab: {fileID: 2089060925281772121, guid: 1bbb9afb45864d542991581efa253b98, type: 3}
     pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
-  - tile: {fileID: 11400000, guid: b1a98c0e132244446a976f567505d2d9, type: 2}
-    prefab: {fileID: 2089060925281772121, guid: 84b06613eebe50641950f48a486a7ac4, type: 3}
-    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
-  - tile: {fileID: 11400000, guid: 3d8240ae476771f46a52118049111e5d, type: 2}
-    prefab: {fileID: 2089060925281772121, guid: 9f37ca22f49c6e14d9fac96a4b7375c2, type: 3}
-    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
-  - tile: {fileID: 11400000, guid: 543e1632afc90f04a9d2cff67853ca91, type: 2}
-    prefab: {fileID: 2089060925281772121, guid: 4b2655a5697c1614a87e9c5f409b8159, type: 3}
-    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
   - tile: {fileID: 11400000, guid: d98c63d12e836034b82557b7640df2cd, type: 2}
     prefab: {fileID: 1479918249820338292, guid: ac4d1d135e45c4845a1ab0a784588597, type: 3}
     pieceConfig: {fileID: 11400000, guid: ec2483d723db847f78c0f1271f46ff85, type: 2}
@@ -100,3 +88,27 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: fe60508885c215946913739ed1a28467, type: 2}
     prefab: {fileID: 1479918249820338292, guid: 636df0db42df7d2499e47eaf4c8d9c09, type: 3}
     pieceConfig: {fileID: 11400000, guid: ec2483d723db847f78c0f1271f46ff85, type: 2}
+  - tile: {fileID: 11400000, guid: a38c5348c64e6734abd5b31cb83aaaa6, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: b20a3050f615a5949acf7eb6c56e37d4, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 180b3f2bd40d530488dea2611c0cacef, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 99c2111026ca2df4782229d953be7288, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 4da43a7d1ee25984baff1a0700d1caa4, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 959edbe940874ec42b4479407af1bea9, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 0633591f209b3ef408fbb922888ab645, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: a39aff686f44af641a390ee8eab0d079, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: f646c3ebb9fe85f499cc3a82b2470af9, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 84b06613eebe50641950f48a486a7ac4, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 7670030893968374898d1cbb34b67ab4, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 9f37ca22f49c6e14d9fac96a4b7375c2, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 30de5aea048eedd419c1708b068bea8d, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 4b2655a5697c1614a87e9c5f409b8159, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
+  - tile: {fileID: 11400000, guid: 938864300e4a71f469dea23cda46c643, type: 2}
+    prefab: {fileID: 2089060925281772121, guid: 4eb7a0684e68c8d4192af94fd5b7ff31, type: 3}
+    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
