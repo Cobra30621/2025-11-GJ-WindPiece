@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Core.Pieces;
 using Core.Utils;
 using Core.Wind;
@@ -24,7 +25,7 @@ namespace Core.Board
         {
             var moves = new List<PieceMoveResult>();
             if (source is WindPiece)
-                EnqueueDirectionalMoves(GetAllPiecesExcept(source), source.Position, GetWindDirection(source), moves);
+                EnqueueDirectionalMoves(GetAllPiecesExcept(source).ToList(), source.Position, GetWindDirection(source), moves);
 
             HandleDeathQueue(moves);
             return moves;
@@ -101,7 +102,10 @@ namespace Core.Board
             
             Vector2Int windDir = GetWindDirection(sourceOfDeath);
             Debug.Log($"EnqueueGlobalWind: {sourceOfDeath.name} {windDir}");
-            foreach (var piece in GetAllPieces())
+            var pieces = GetAllPieces().ToList();
+            PieceSorter.SortByDirection( pieces, windDir); 
+            
+            foreach (var piece in pieces)
             {
                 ApplyPieceMove(piece, windDir, moves);
             }
@@ -128,8 +132,10 @@ namespace Core.Board
                     yield return p;
         }
 
-        private void EnqueueDirectionalMoves(IEnumerable<Piece> pieces, Vector2Int origin, Vector2Int dir, List<PieceMoveResult> moves)
+        private void EnqueueDirectionalMoves(List<Piece> pieces, Vector2Int origin, Vector2Int dir, List<PieceMoveResult> moves)
         {
+            PieceSorter.SortByDirection(pieces, dir);
+            
             foreach (var piece in pieces)
             {
                 if (!IsInDirectionRange(piece.Position, origin, dir))
