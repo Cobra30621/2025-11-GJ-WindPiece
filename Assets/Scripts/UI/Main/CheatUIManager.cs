@@ -61,7 +61,7 @@ namespace UI.Main
         // 按鈕功能實作
         // ============================================================
 
-        private void OnRestartClicked()
+        public void OnRestartClicked()
         {
             GameManager.Instance.RestartLevel();
         }

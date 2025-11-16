@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: "\u5F80\u4E0A\u5439"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2c8226155ec65e4096bc00d065134d0, type: 2}
-  m_sharedMaterial: {fileID: 1668652764012616596, guid: d2c8226155ec65e4096bc00d065134d0, type: 2}
+  m_sharedMaterial: {fileID: -8518563248392390880, guid: d2c8226155ec65e4096bc00d065134d0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
