@@ -37,21 +37,19 @@ namespace Core.GameFlow
         {
             Instance = this;
         }
-
+        
         [Button]
-        void Start()
-        {
-            StartGame();
-        }
-
         public void StartGame()
         {
-            StartPlayerTurn();
+            StartCoroutine(StartPlayerTurn());
         }
 
-        public void StartPlayerTurn()
+        private IEnumerator StartPlayerTurn()
         {
             CurrentState = GameState.PlayerTurn;
+            StartCoroutine(ShowTextBox.Instance.Show("玩家行動"));
+            yield return null;
+            
             PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
             GameEventBus.OnTurnStart_Player?.Invoke();
         }
@@ -64,7 +62,7 @@ namespace Core.GameFlow
             if (!BoardManager.Instance.CanAddPiece(pos)) return false;
             
             // Lock Player 
-            PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockPlacement);
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockAll);
             
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);
@@ -110,7 +108,7 @@ namespace Core.GameFlow
 
         IEnumerator HandleEnemyTurn()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return ShowTextBox.Instance.Show("敵人行動");
 
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
@@ -121,7 +119,7 @@ namespace Core.GameFlow
             CheckLevelEnd();
             CheckLose();
 
-            StartPlayerTurn();
+            StartCoroutine(StartPlayerTurn());
         }
 
 

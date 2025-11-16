@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System;
 using Core.Audio;
+using Core.GameFlow;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -74,5 +75,10 @@ public class DialogueManager : MonoBehaviour
         OnDialogueFinished?.Invoke();
         isShowing = false;
         panel.SetActive(false);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.StartGame();
+        }
     }
 }
