@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856117388daa4772b75228700ad67990, type: 3}
   m_Name: Right Wind Piece
   m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Pieces.PieceConfig
-  pieceName: "\u5F80\u53F3\u5439"
-  description: "\u5F80\u53F3\u5439"
+  pieceName: "\u7425\u9EC3\u98A8\u77F3"
+  description: "\u5C07\u81EA\u8EAB\u53F3\u5074\uFF08\u4E0D\u542B\u81EA\u5DF1\uFF09\u6240\u6709\u4EA1\u9748\u8207\u98A8\u77F3\u5411\u53F3\u63A8\u4E00\u683C\u3002
+    \u6389\u843D\u6D1E\u5F8C\uFF0C\u6703\u5C07\u6240\u6709\u4EA1\u9748\u8207\u98A8\u77F3\u5411\u53F3\u5439\u4E00\u683C\u3002"
   image: {fileID: -198504179318791885, guid: 836e7db97ee1edb4abd1e84cc1159068, type: 3}
   prefab: {fileID: 5263307599557126888, guid: 773990bd51eae4fbd87319935429874e, type: 3}
   windDirection: 3

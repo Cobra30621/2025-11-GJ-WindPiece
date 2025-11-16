@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856117388daa4772b75228700ad67990, type: 3}
   m_Name: Obstacle Piece
   m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Pieces.PieceConfig
-  pieceName: 
+  pieceName: "\u969C\u7919\u7269"
+  description: 
   image: {fileID: 4544162046199598720, guid: b114e9346e60a7a4ca91389cea50bfa4, type: 3}
   prefab: {fileID: 2089060925281772121, guid: 129d4d3e7db1b408e89d0c75fa61deab, type: 3}
   windDirection: 4
-  windPower: 1
   isObstacle: 1
