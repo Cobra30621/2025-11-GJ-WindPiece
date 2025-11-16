@@ -538,15 +538,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
       propertyPath: dialogue.Array.size
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
       propertyPath: 'dialogue.Array.data[0]'
-      value: 1
+      value: "\u4F60\u662F\u4E00\u540D\u9B54\u6CD5\u4F7F\u3002 "
       objectReference: {fileID: 0}
     - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
       propertyPath: 'dialogue.Array.data[1]'
-      value: 2
+      value: "\u7136\u800C\u5728\u79D1\u6280\u9060\u6BD4\u9B54\u6CD5\u66F4\u4FBF\u5229\u7684\u6642\u4EE3\uFF0C\u4F60\u7684\u5DE5\u4F5C\u5C11\u5F97\u53EF\u6190\u3002 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: 'dialogue.Array.data[2]'
+      value: "\u751A\u81F3\u524D\u5E7E\u5E74\u75AB\u60C5\u7206\u767C\u6642\uFF0C\u4F60\u5DEE\u9EDE\u9913\u6B7B\u5728\u5BB6\u3002 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: 'dialogue.Array.data[3]'
+      value: "\u76F4\u5230\u4E0D\u4E45\u524D\uFF0C\u4E00\u5EA7\u53E4\u8001\u7684\u98C4\u6D6E\u7A7A\u5CF6\u7A81\u7136\u51FA\u73FE\u5728\u57CE\u5E02\u5916\u570D\u3002 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: 'dialogue.Array.data[4]'
+      value: "\u5168\u570B\u7684\u8003\u53E4\u5B78\u5BB6\u8702\u64C1\u800C\u81F3\uFF0C\u4E26\u5728\u5CF6\u4E0A\u767C\u73FE\u4E00\u5EA7\u4EE5\u300C\u98A8\u4E4B\u9B54\u6CD5\u300D\u69CB\u7BC9\u7684\u5343\u5E74\u53E4\u57CE\u3002 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: 'dialogue.Array.data[5]'
+      value: "\u90A3\u88E1\u904D\u5E03\u88AB\u98A8\u9B54\u6CD5\u9A45\u52D5\u7684\u77F3\u584A\u8207\u6A5F\u95DC\uFF0C\u4F46\u5C0D\u9B54\u6CD5\u6C92\u6709\u7279\u5225\u6DF1\u5165\u7684\u4E00\u822C\u4EBA\u6839\u672C\u7121\u6CD5\u555F\u52D5\u5B83\u5011\u3002 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: 'dialogue.Array.data[6]'
+      value: "\u9019\u6642\uFF0C\u4F5C\u70BA\u5168\u570B\u50C5\u5B58\u3001\u4ECD\u7136\u5C08\u7CBE\u9B54\u6CD5\u7684\u5C11\u6578\u8853\u58EB\u4E4B\u4E00\u7684\u4F60 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421696330030764099, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: 'dialogue.Array.data[7]'
+      value: "\u4E45\u9055\u7684\u6D3E\u4E0A\u4E86\u7528\u5834\uFF0C\u88AB\u6307\u540D\u524D\u53BB\u9032\u884C\u8ABF\u67E5\u2026\u2026 "
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
