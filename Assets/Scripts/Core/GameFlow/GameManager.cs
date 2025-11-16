@@ -119,9 +119,23 @@ namespace Core.GameFlow
 
             // 检查胜负并回到玩家回合
             CheckLevelEnd();
+            CheckLose();
+            
             StartPlayerTurn();
         }
 
+
+
+        public void CheckLose()
+        {
+            // 沒有棋子可以下就輸了
+            if (PieceSelectorUI.Instance.IsPieceEmpty)
+            {
+                CurrentState = GameState.Lose;
+                LoseUIManager.Instance.ShowLose();
+            }
+        }
+        
         public void CheckLevelEnd()
         {
             // 簡單示例：若場上沒有 Enemy 則過關
