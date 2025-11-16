@@ -11,7 +11,10 @@ namespace Core.Audio
         public class SFXEntry
         {
             public SFXType type;
-            public AudioClip clip;
+            public AudioClip clip => clips.Count > 0 ? clips[UnityEngine.Random.Range(0, clips.Count)] : null;
+            
+            [Tooltip("可加入多個 Clip，每次播放會隨機選擇一個")]
+            public List<AudioClip> clips = new List<AudioClip>();
         }
 
         public List<SFXEntry> sounds = new List<SFXEntry>();

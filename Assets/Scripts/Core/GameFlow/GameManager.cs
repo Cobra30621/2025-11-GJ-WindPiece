@@ -98,37 +98,33 @@ namespace Core.GameFlow
             CurrentState = GameState.Animating;
             GameEventBus.OnWindStart?.Invoke();
 
-            // windSystem.Resolve returns sequence of moves to play
             moveEvents = PieceMovement.Instance.ResolveWindMoves(piece);
-            var moves = PieceMovement.FlattenMovementEvents(moveEvents);
-            
+    
             SFXManager.Instance.PlaySFX(SFXType.Wind);
-            yield return animator.PlayMoves(moves);
+            yield return animator.PlayMoves(moveEvents);
 
             GameEventBus.OnWindEnd?.Invoke();
         }
+
         
         
 
         IEnumerator HandleEnemyTurn()
         {
-            yield return new WaitForSeconds(0.5f);
-            
+            yield return new WaitForSeconds(1f);
+
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
 
             moveEvents = PieceMovement.Instance.ResolveEnemyMoves();
-            var moves = PieceMovement.FlattenMovementEvents(moveEvents);
-            
-            yield return animator.PlayMoves(moves);
+            yield return animator.PlayMoves(moveEvents);
 
-            // 检查胜负并回到玩家回合
             CheckLevelEnd();
-            
             CheckLose();
-            
+
             StartPlayerTurn();
         }
+
 
 
 

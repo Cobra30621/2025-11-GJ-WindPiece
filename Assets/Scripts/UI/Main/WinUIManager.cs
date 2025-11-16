@@ -1,3 +1,4 @@
+using Core.Audio;
 using Core.GameFlow;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace UI.Main
 
         public void ShowWin()
         {
+            SFXManager.Instance.PlaySFX(SFXType.LevelClear);
             winPanel.SetActive(true);
         }
 

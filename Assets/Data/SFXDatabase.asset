@@ -14,12 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Core.Audio.SFXDatabase
   sounds:
   - type: 0
-    clip: {fileID: 8300000, guid: 174bc64a2fa14437da708433c196312a, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 40d91cf2b54ff4f55889ea51b6870814, type: 3}
+    - {fileID: 8300000, guid: 4e4dc868863724d8f9181e6ae1949dd5, type: 3}
   - type: 1
-    clip: {fileID: 8300000, guid: 75ad37026044e428ea9e785672dd75fa, type: 3}
+    clips:
+    - {fileID: 8300000, guid: dfecee1c50dd04330823ee6b6087e0c6, type: 3}
+    - {fileID: 8300000, guid: 22780e4eabeae4a8db41f658a5e214f2, type: 3}
   - type: 2
-    clip: {fileID: 8300000, guid: 6af626a06029d4f6aa14417dbdeb4aca, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 6af626a06029d4f6aa14417dbdeb4aca, type: 3}
   - type: 3
-    clip: {fileID: 8300000, guid: 71a90f3c1c812460ba7f712b0660d174, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 71a90f3c1c812460ba7f712b0660d174, type: 3}
   - type: 4
-    clip: {fileID: 8300000, guid: 6af626a06029d4f6aa14417dbdeb4aca, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 12cda52af3d6b4b4abeadda7bdfe0f8f, type: 3}
