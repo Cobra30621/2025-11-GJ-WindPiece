@@ -75,6 +75,7 @@ namespace Core.Board
                 return false;
 
             Vector2Int targetPos = piece.Position + dir;
+            // Debug.Log($"Apply Move {piece.name} from {piece.Position} add {dir} {board.CanMove(targetPos)}");
             if (!board.CanMove(targetPos))
                 return false;
 
@@ -132,8 +133,10 @@ namespace Core.Board
             var pieces = GetAllPieces().ToList();
             PieceSorter.SortByDirection(pieces, windDir);
 
+            // Debug.Log($"Trigger Global Move {sourceOfDeath.name}");
             foreach (var piece in pieces)
             {
+                // Debug.Log($"Move {piece.name}: {piece.Position} + {windDir}");
                 ApplyPieceMove(piece, windDir, evt.moves);
             }
 
