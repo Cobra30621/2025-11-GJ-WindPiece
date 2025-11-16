@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public string[] dialogue;   // 對話內容
     private int index = 0;
     private bool isShowing = false;
+    public event Action OnDialogueFinished; // 對話播放完畢
     void Start() // test
     {
         if (dialogue.Length != 0)
@@ -57,6 +59,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Close()
     {
+        OnDialogueFinished?.Invoke();
         isShowing = false;
         panel.SetActive(false);
     }
