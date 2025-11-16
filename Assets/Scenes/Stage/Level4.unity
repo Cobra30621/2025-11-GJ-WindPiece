@@ -7989,6 +7989,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1399617973585220894, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
+      propertyPath: dialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3828570388667593003, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
