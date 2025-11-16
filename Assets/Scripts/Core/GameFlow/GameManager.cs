@@ -62,7 +62,7 @@ namespace Core.GameFlow
             if (!BoardManager.Instance.CanAddPiece(pos)) return false;
             
             // Lock Player 
-            PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockAll);
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockPlacement);
             
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);

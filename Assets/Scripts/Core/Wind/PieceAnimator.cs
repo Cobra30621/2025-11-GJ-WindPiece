@@ -69,8 +69,6 @@ namespace Core.Wind
 
                 yield return new WaitForSeconds(0.5f);
             }
-
-            yield return new WaitForSeconds(0.5f);
         }
     }
 }

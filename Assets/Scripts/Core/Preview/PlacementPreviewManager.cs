@@ -42,7 +42,10 @@ public class PlacementPreviewManager : MonoBehaviour
         if (currentConfig == null)
             return;
 
-        UpdateHoverPreview();
+        if (PieceSelectionManager.Instance.LockMode == InputLockMode.Unlock)
+        {
+            UpdateHoverPreview();
+        }
     }
 
     // ======================================================
