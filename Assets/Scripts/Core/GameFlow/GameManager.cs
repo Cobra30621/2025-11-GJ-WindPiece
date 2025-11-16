@@ -111,14 +111,18 @@ namespace Core.GameFlow
         IEnumerator HandleEnemyTurn()
         {
             if (IsGameEnd()) yield return null;
-            yield return ShowTextBox.Instance.Show("敵人行動");
+            if (BoardManager.Instance.HaveMovableEnemies())
+            {
+                yield return ShowTextBox.Instance.Show("敵人行動");
 
-            CurrentState = GameState.EnemyTurn;
-            GameEventBus.OnTurnStart_Enemy?.Invoke();
+                CurrentState = GameState.EnemyTurn;
+                GameEventBus.OnTurnStart_Enemy?.Invoke();
 
-            moveEvents = PieceMovement.Instance.ResolveEnemyMoves();
-            yield return animator.PlayMoves(moveEvents);
-
+                moveEvents = PieceMovement.Instance.ResolveEnemyMoves();
+                yield return animator.PlayMoves(moveEvents);
+            }
+            
+            
             CheckLevelEnd();
             CheckLose();
 
