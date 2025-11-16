@@ -38,7 +38,10 @@ public class DialogueManager : MonoBehaviour
 
     public void Show()
     {
-        PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockAll);
+        if (PieceSelectionManager.Instance != null)
+        {
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
+        }
         index = 0;
         isShowing = true;
 
@@ -61,7 +64,10 @@ public class DialogueManager : MonoBehaviour
 
     public void Close()
     {
-        PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
+        if (PieceSelectionManager.Instance != null)
+        {
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
+        }
         OnDialogueFinished?.Invoke();
         isShowing = false;
         panel.SetActive(false);
