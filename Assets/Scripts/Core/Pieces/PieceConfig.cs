@@ -7,6 +7,7 @@ namespace Game.Core.Pieces
     public class PieceConfig : ScriptableObject
     {
         public string pieceName;
+        public string description;
         public Sprite image;
         public GameObject prefab;
 
