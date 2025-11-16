@@ -1384,12 +1384,6 @@ MonoBehaviour:
   buttonContainer: {fileID: 8212968652642164696}
   buttonPrefab: {fileID: 1108334310196052798, guid: c2e7e3044b98044959ed568b80ca5014, type: 3}
   deselectButton: {fileID: 1108334310196052798, guid: c2e7e3044b98044959ed568b80ca5014, type: 3}
-  pieceConfigs:
-  - {fileID: 11400000, guid: 3bae4f79078ce476fa82a03b2900bce2, type: 2}
-  - {fileID: 11400000, guid: e3aac97c8160947e6a94708e13184007, type: 2}
-  - {fileID: 11400000, guid: a9503b62df7f942c1bbaff47683a3a37, type: 2}
-  - {fileID: 11400000, guid: 145ebd0f63616423baa9e3936d1475d4, type: 2}
-  - {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
 --- !u!1001 &7472475706882868573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1483,9 +1477,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4976946472962561197, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976946472962561197, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: m_margin.w
+      value: 6.2770996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976946472962561197, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: m_margin.z
+      value: 5.230774
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976946472962561197, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: d2c8226155ec65e4096bc00d065134d0, type: 2}
+    - target: {fileID: 4976946472962561197, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 4976946472962561197, guid: ab8761758cdbd2749b0ffde1523a813e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
