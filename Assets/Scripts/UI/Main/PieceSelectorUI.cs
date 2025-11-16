@@ -20,11 +20,12 @@ namespace UI.Main
         [SerializeField] private Button buttonPrefab;
         [SerializeField] private Button deselectButton;
 
-        [ShowInInspector]
+        [SerializeField]
         [LabelText("所有的棋子(給 debug 用)")]
         private List<PieceConfig> allPieceList;
         
-        [SerializeField]
+        
+        [ShowInInspector]
         private List<PieceUsageConfig> pieceUsageList;
 
         private List<PieceButtonSlot> buttonSlots = new List<PieceButtonSlot>();

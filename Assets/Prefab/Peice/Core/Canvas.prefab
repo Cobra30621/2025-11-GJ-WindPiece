@@ -2958,7 +2958,12 @@ MonoBehaviour:
   buttonContainer: {fileID: 8212968652642164696}
   buttonPrefab: {fileID: 1108334310196052798, guid: c2e7e3044b98044959ed568b80ca5014, type: 3}
   deselectButton: {fileID: 1108334310196052798, guid: c2e7e3044b98044959ed568b80ca5014, type: 3}
-  pieceUsageList: []
+  allPieceList:
+  - {fileID: 11400000, guid: 145ebd0f63616423baa9e3936d1475d4, type: 2}
+  - {fileID: 11400000, guid: a9503b62df7f942c1bbaff47683a3a37, type: 2}
+  - {fileID: 11400000, guid: 3bae4f79078ce476fa82a03b2900bce2, type: 2}
+  - {fileID: 11400000, guid: e3aac97c8160947e6a94708e13184007, type: 2}
+  - {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
 --- !u!1 &7515690819461254429
 GameObject:
   m_ObjectHideFlags: 0
