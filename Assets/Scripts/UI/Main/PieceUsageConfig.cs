@@ -6,6 +6,6 @@ namespace UI.Main
     public class PieceUsageConfig
     {
         public PieceConfig config;
-        public int count;
+        public int count = 1;
     }
 }
