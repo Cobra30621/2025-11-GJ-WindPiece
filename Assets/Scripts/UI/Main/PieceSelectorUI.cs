@@ -18,7 +18,7 @@ namespace UI.Main
         [Header("UI References")]
         [SerializeField] private Transform buttonContainer;
         [SerializeField] private Button buttonPrefab;
-        [SerializeField] private Button deselectButton;
+        // [SerializeField] private Button deselectButton;
 
         [SerializeField]
         [LabelText("所有的棋子(給 debug 用)")]
@@ -52,14 +52,7 @@ namespace UI.Main
 
             GenerateButtonsFromUsageList(pieceUsageList);
 
-            if (deselectButton != null)
-            {
-                deselectButton.onClick.AddListener(() =>
-                {
-                    DeselectCurrentButton();
-                    PieceSelectionManager.Instance.DeselectPiece();
-                });
-            }
+  
 
             GameEventBus.OnPiecePlaced += OnPieceUsed;
         }
