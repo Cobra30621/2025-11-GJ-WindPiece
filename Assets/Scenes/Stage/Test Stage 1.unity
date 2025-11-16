@@ -2307,19 +2307,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[0].count
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[1].count
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[2].count
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[3].count
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780253993337326739, guid: 3a1d91b1544b44a32ae8184188fc8aed, type: 3}
       propertyPath: pieceUsageList.Array.data[4].count
