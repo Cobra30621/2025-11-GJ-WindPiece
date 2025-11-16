@@ -43,9 +43,6 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: f670718764c463142a0f9a4e89bf7ff8, type: 2}
     prefab: {fileID: 2089060925281772121, guid: fd32d3d0851d1bc45a365947c8436fb4, type: 3}
     pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
-  - tile: {fileID: 11400000, guid: 1558ea7e937e35b42a92bd2e66b88f87, type: 2}
-    prefab: {fileID: 2089060925281772121, guid: b20a3050f615a5949acf7eb6c56e37d4, type: 3}
-    pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
   - tile: {fileID: 11400000, guid: f35ae2be5c4826647bc3437a0866d24c, type: 2}
     prefab: {fileID: 2089060925281772121, guid: 176a67f542fca54449fdc6683cbb830b, type: 3}
     pieceConfig: {fileID: 11400000, guid: e2ccb023282be487994f94aa28edb990, type: 2}
