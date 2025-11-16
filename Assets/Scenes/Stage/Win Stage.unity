@@ -286,8 +286,17 @@ MonoBehaviour:
     - {fileID: 3373621494162894196, guid: 577c27c8d84c729449bff27761dca8bf, type: 3}
     - {fileID: -1371252455819440678, guid: 88264a1e13734f148bef6a5bb7b9200f, type: 3}
     - {fileID: -3926387587215527241, guid: 3a405a56747e14045be9bf41f0dc37f9, type: 3}
+  - frames:
+    - {fileID: -1675273491431618826, guid: 00775b51848d96f428e13c16b93510d7, type: 3}
+    - {fileID: 751927462002341772, guid: 645bb4fb948d3b340a3269df47cd7ea8, type: 3}
+    - {fileID: -831400496402652719, guid: 72734e40882deca4580929e670f8dec3, type: 3}
+    - {fileID: -5293428681666567135, guid: 62105dbb28761e946b19cf0321ac1675, type: 3}
+    - {fileID: 5195383277151630889, guid: 763c11058be331e47b7e33f4f6617d30, type: 3}
+    - {fileID: -8916174130182336212, guid: 1a67d3fbed31f52478742d3d3d69b1ad, type: 3}
+    - {fileID: 6975574932127613466, guid: 9bbcf87e6b0fda44dbf592364be5ed15, type: 3}
+    - {fileID: -4611004894888955839, guid: 0f00d113bdddebb45b7bcd8b7ba6028a, type: 3}
   frameTime: 0.1
-  groupDuration: 2
+  groupDuration: 2.5
 --- !u!1 &565213209
 GameObject:
   m_ObjectHideFlags: 0
