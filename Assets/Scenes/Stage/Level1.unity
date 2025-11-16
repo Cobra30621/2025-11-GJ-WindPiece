@@ -3591,17 +3591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1399617973585220894, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
       propertyPath: 'dialogue.Array.data[0]'
-      value: "\u547C\u2026\u2026\u547C\u2026\u2026\u592A\u4E45\u6C92\u51FA\u9060\u9580\uFF0C\u90FD\u5FEB\u5FD8\u8A18\u600E\u9EBC\u8D70\u4E0A\u5761\u8DEF\u4E86
-        \u7D42\u65BC\u5230\u907A\u8DE1\u9644\u8FD1\u4E86\uFF0C\u4ED6\u5011\u8AAA\u7684\u300C\u795E\u79D8\u7684\u9748\u9AD4\u300D\u5C31\u662F\u9019\u500B\u5427
-        \u6211\u770B\u770B\u2026\u2026 \u554A\uFF0C\u9019\u500B\u662F\u56E0\u77F3\u982D\u9B54\u529B\u6563\u767C\u4E0D\u7A69\u800C\u5728\u9644\u8FD1\u805A\u96C6\u800C\u6210\u7684\u300C\u6B98\u9748\u300D
-        \u9019\u985E\u6B98\u9748\u96D6\u7136\u4E0D\u6703\u4E3B\u52D5\u653B\u64CA\u4EBA\uFF0C\u4F46\u53EA\u8981\u5B83\u5728\u9019\u9644\u8FD1\uFF0C\u5C31\u6703\u5F71\u97FF\u5230\u6211\u4F7F\u7528\u9B54\u6CD5\u7814\u7A76\u907A\u8DE1
-        \u81F3\u5C11\u8981\u628A\u5B83\u5011\u79FB\u958B\u2026\u2026\u6211\u770B\u770B\u5594\u2026\u2026
-        \u554A\uFF01\u4E0A\u65B9\u6709\u500B\u6D1E \u9019\u7A7A\u5CF6\u9664\u4E86\u5468\u570D\u96A8\u6642\u6703\u4E00\u5931\u8DB3\u6210\u5343\u53E4\u6068
-        \u5728\u7A7A\u5CF6\u5167\u90E8\u4E5F\u6703\u6709\u4E00\u4E9B\u7834\u53E3
-        \u5982\u679C\u80FD\u5920\u628A\u6B98\u9748\u63A8\u9032\u53BB\uFF0C\u5B83\u5011\u9060\u96E2\u9019\u4E9B\u9B54\u6CD5\u77F3\u5F8C\u81EA\u7136\u4E5F\u6703\u6D88\u6563\u5728\u5927\u81EA\u7136
-        \u4E0D\u904E\u9019\u4E9B\u6B98\u9748\u7121\u6CD5\u76F4\u63A5\u78B0\u5230\u5B83\u5011\uFF0C\u5C0D\u5B83\u5011\u7528\u9B54\u6CD5\u4E5F\u53EA\u6703\u88AB\u5B83\u5011\u5438\u6536\u6389
-        \u53EA\u6709\u300C\u98A8\u77F3\u300D\u9019\u7A2E\u53E4\u8001\u9B54\u6CD5\u5439\u51FA\u7684\u98A8\u53EF\u4EE5\u5C07\u5B83\u5011\u79FB\u52D5
-        \u800C\u98A8\u77F3\uFF0C\u563F\u563F\uFF0C\u4F86\u7684\u8DEF\u4E0A\u6211\u64BF\u4E86\u5E7E\u500B\uFF0C\u9019\u4E16\u754C\u4E0A\u600E\u9EBC\u6709\u90A3\u9EBC\u5DE7\u7684\u4E8B\uFF01 "
+      value: "\u547C\u2026\u2026\u547C\u2026\u2026\u592A\u4E45\u6C92\u51FA\u9060\u9580\uFF0C\u90FD\u5FEB\u5FD8\u8A18\u600E\u9EBC\u8D70\u4E0A\u5761\u8DEF\u4E86"
       objectReference: {fileID: 0}
     - target: {fileID: 1399617973585220894, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
       propertyPath: 'dialogue.Array.data[1]'
@@ -3687,9 +3677,21 @@ PrefabInstance:
       propertyPath: 'dialogue.Array.data[21]'
       value: "\u5C31\u9019\u6A23\u7E7C\u7E8C\u591A\u653E\u5E7E\u500B\u8B93\u5B83\u6389\u4E0B\u6D1E\u53BB\u5427 "
       objectReference: {fileID: 0}
+    - target: {fileID: 2005561047246873960, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2495622436656796144, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
       propertyPath: m_fontSize
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495622436656796144, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
+      propertyPath: m_margin.w
+      value: 8.483631
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495622436656796144, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
+      propertyPath: m_margin.z
+      value: 11.311523
       objectReference: {fileID: 0}
     - target: {fileID: 2495622436656796144, guid: 8a27867156faa4887b170a4bd1c019d5, type: 3}
       propertyPath: m_fontSizeBase
