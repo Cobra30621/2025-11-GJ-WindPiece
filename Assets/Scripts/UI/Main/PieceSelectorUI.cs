@@ -14,18 +14,19 @@ namespace UI.Main
     public class PieceSelectorUI : MonoBehaviour
     {
         public static PieceSelectorUI Instance { get; private set; }
-        
-        
-        
+
         [Header("UI References")]
         [SerializeField] private Transform buttonContainer;
         [SerializeField] private Button buttonPrefab;
         [SerializeField] private Button deselectButton;
 
         [ShowInInspector]
+        [LabelText("所有的棋子(給 debug 用)")]
+        private List<PieceConfig> allPieceList;
+        
+        [SerializeField]
         private List<PieceUsageConfig> pieceUsageList;
 
-        /// <summary> 存放所有按鈕（1 config 對應多個按鈕） </summary>
         private List<PieceButtonSlot> buttonSlots = new List<PieceButtonSlot>();
 
         private class PieceButtonSlot
@@ -36,20 +37,19 @@ namespace UI.Main
 
         [ShowInInspector]
         private PieceButtonSlot currentSelectedSlot = null;
-        
-        
+
         public bool IsPieceEmpty => buttonSlots.Count == 0;
-        
+
         private void Awake()
         {
             Instance = this;
         }
-        
+
         private void Start()
         {
             pieceUsageList = StageManager.Instance.currentStageInstance.pieceUsageList;
-            
-            GenerateButtons();
+
+            GenerateButtonsFromUsageList(pieceUsageList);
 
             if (deselectButton != null)
             {
@@ -59,40 +59,73 @@ namespace UI.Main
                     PieceSelectionManager.Instance.DeselectPiece();
                 });
             }
-            
+
             GameEventBus.OnPiecePlaced += OnPieceUsed;
         }
 
-        private void GenerateButtons()
+        #region 生成按鈕
+
+        private void GenerateButtonsFromUsageList(List<PieceUsageConfig> usageList)
         {
-            foreach (var usage in pieceUsageList)
+            foreach (var usage in usageList)
             {
                 for (int i = 0; i < usage.count; i++)
                 {
-                    var btn = Instantiate(buttonPrefab, buttonContainer);
-
-                    btn.transform.Find("image")
-                        .GetComponent<Image>().sprite = usage.config.image;
-
-                    btn.GetComponentInChildren<TextMeshProUGUI>().text = usage.config.pieceName;
-
-                    var slot = new PieceButtonSlot
-                    {
-                        config = usage.config,
-                        button = btn
-                    };
-
-                    buttonSlots.Add(slot);
-
-                    btn.onClick.AddListener(() => OnClickedSlot(slot));
+                    CreateButtonSlot(usage.config);
                 }
             }
         }
 
+        /// <summary>
+        /// 核心按鈕生成方法
+        /// </summary>
+        private void CreateButtonSlot(PieceConfig config)
+        {
+            var btn = Instantiate(buttonPrefab, buttonContainer);
+
+            // 設定圖片與名稱
+            var image = btn.transform.Find("image")?.GetComponent<Image>();
+            if (image != null) image.sprite = config.image;
+
+            var text = btn.GetComponentInChildren<TextMeshProUGUI>();
+            if (text != null) text.text = config.pieceName;
+
+            var slot = new PieceButtonSlot
+            {
+                config = config,
+                button = btn
+            };
+
+            buttonSlots.Add(slot);
+
+            btn.onClick.AddListener(() => OnClickedSlot(slot));
+        }
+
+        #endregion
+
+        #region 外部新增按鈕方法
+
+        /// <summary>
+        /// 將指定的 PieceConfig List 全部加入 buttonSlots
+        /// </summary>
+        [Button]
+        public void AddAllPiece()
+        {
+            var pieces = allPieceList;
+            if (pieces == null || pieces.Count == 0) return;
+
+            foreach (var piece in pieces)
+            {
+                CreateButtonSlot(piece);
+            }
+        }
+
+        #endregion
+
         private void OnClickedSlot(PieceButtonSlot slot)
         {
-            if(!PieceSelectionManager.Instance.CanSelectPiece()) return;
-            
+            if (!PieceSelectionManager.Instance.CanSelectPiece()) return;
+
             currentSelectedSlot = slot;
 
             // 通知 SelectionManager
@@ -116,14 +149,11 @@ namespace UI.Main
             HighlightSelectedButton();
         }
 
-        /// <summary>
-        /// 當棋子放下後，由 SelectionManager 發出事件
-        /// </summary>
         private void OnPieceUsed(Piece piece)
         {
-            if(piece == null) return;
+            if (piece == null) return;
             if (currentSelectedSlot == null) return;
-            if (currentSelectedSlot.config !=piece.Config) return;
+            if (currentSelectedSlot.config != piece.Config) return;
 
             // 移除使用掉的按鈕
             buttonSlots.Remove(currentSelectedSlot);
