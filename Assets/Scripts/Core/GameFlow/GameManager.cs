@@ -51,7 +51,7 @@ namespace Core.GameFlow
         public void StartPlayerTurn()
         {
             CurrentState = GameState.PlayerTurn;
-            // PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.Unlock);
             GameEventBus.OnTurnStart_Player?.Invoke();
         }
 
@@ -63,7 +63,7 @@ namespace Core.GameFlow
             if (!BoardManager.Instance.CanAddPiece(pos)) return false;
             
             // Lock Player 
-            // PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockPlacement);
+            PieceSelectionManager.Instance.SetLockMode(InputLockMode.LockPlacement);
             
             // Instantiate & place
             var piece = pieceFactory.Spawn(config, pos);
@@ -109,6 +109,8 @@ namespace Core.GameFlow
 
         IEnumerator HandleEnemyTurn()
         {
+            yield return new WaitForSeconds(0.5f);
+            
             CurrentState = GameState.EnemyTurn;
             GameEventBus.OnTurnStart_Enemy?.Invoke();
 
@@ -119,9 +121,23 @@ namespace Core.GameFlow
 
             // 检查胜负并回到玩家回合
             CheckLevelEnd();
+            CheckLose();
+            
             StartPlayerTurn();
         }
 
+
+
+        public void CheckLose()
+        {
+            // 沒有棋子可以下就輸了
+            if (PieceSelectorUI.Instance.IsPieceEmpty)
+            {
+                CurrentState = GameState.Lose;
+                LoseUIManager.Instance.ShowLose();
+            }
+        }
+        
         public void CheckLevelEnd()
         {
             // 簡單示例：若場上沒有 Enemy 則過關

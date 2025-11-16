@@ -13,6 +13,10 @@ namespace UI.Main
 {
     public class PieceSelectorUI : MonoBehaviour
     {
+        public static PieceSelectorUI Instance { get; private set; }
+        
+        
+        
         [Header("UI References")]
         [SerializeField] private Transform buttonContainer;
         [SerializeField] private Button buttonPrefab;
@@ -33,7 +37,14 @@ namespace UI.Main
         [ShowInInspector]
         private PieceButtonSlot currentSelectedSlot = null;
         
-
+        
+        public bool IsPieceEmpty => buttonSlots.Count == 0;
+        
+        private void Awake()
+        {
+            Instance = this;
+        }
+        
         private void Start()
         {
             pieceUsageList = StageManager.Instance.currentStageInstance.pieceUsageList;
