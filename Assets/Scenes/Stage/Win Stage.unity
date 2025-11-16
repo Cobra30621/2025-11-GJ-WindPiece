@@ -295,8 +295,10 @@ MonoBehaviour:
     - {fileID: -8916174130182336212, guid: 1a67d3fbed31f52478742d3d3d69b1ad, type: 3}
     - {fileID: 6975574932127613466, guid: 9bbcf87e6b0fda44dbf592364be5ed15, type: 3}
     - {fileID: -4611004894888955839, guid: 0f00d113bdddebb45b7bcd8b7ba6028a, type: 3}
-  frameTime: 0.1
-  groupDuration: 2.5
+  - frames:
+    - {fileID: 2063826154672905881, guid: 590bf124a4074134ea014d2122bccf62, type: 3}
+  frameTime: 0.25
+  groupDuration: 3
 --- !u!1 &565213209
 GameObject:
   m_ObjectHideFlags: 0
