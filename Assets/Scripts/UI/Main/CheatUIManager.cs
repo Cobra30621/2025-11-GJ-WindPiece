@@ -94,16 +94,5 @@ namespace UI.Main
                 Debug.LogWarning("跳關輸入錯誤：請輸入有效整數");
             }
         }
-
-        // ============================================================
-        // 額外作弊功能（依你的系統調整）
-        // ============================================================
-        public void GiveInfiniteStones()
-        {
-            // 假設你有資源系統
-            // PlayerInventory.Instance.SetInfiniteStones(true);
-
-            Debug.Log("已啟用無限石頭");
-        }
     }
 }

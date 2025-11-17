@@ -24,8 +24,8 @@ namespace Core.GameFlow
 
         public PieceAnimator animator;
         public PieceFactory pieceFactory;
-        
-        
+
+        public LevelLoader LevelLoader;
         private int spawnCounter = 0;
           
         public List<MovementEvent> moveEvents = new List<MovementEvent>();
@@ -164,19 +164,12 @@ namespace Core.GameFlow
         
         public void RestartLevel()
         {
-            Scene current = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(current.buildIndex);
+            SceneReloader.ReloadCurrentScene();
         }
 
         public void LoadNextLevel()
         {
-            Scene current = SceneManager.GetActiveScene();
-            int nextIndex = current.buildIndex + 1;
-
-            if (nextIndex >= SceneManager.sceneCountInBuildSettings)
-                nextIndex = 0; // 沒有下一關 → 回第一關
-
-            SceneManager.LoadScene(nextIndex);
+            LevelLoader.LoadNextLevel();
         }
     }
 }
