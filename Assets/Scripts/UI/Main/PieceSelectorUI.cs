@@ -135,6 +135,9 @@ namespace UI.Main
         {
             foreach (var slot in buttonSlots)
             {
+                if (slot.button == null) continue;                // null 保護
+                if (slot.button.Equals(null)) continue;          // Unity Destroy 保護 (必加)
+                
                 var colors = slot.button.colors;
                 colors.normalColor = (slot == currentSelectedSlot) ? Color.green : Color.white;
                 slot.button.colors = colors;
@@ -164,7 +167,7 @@ namespace UI.Main
 
             // 4. Destroy 按鈕
             Destroy(btn.gameObject);
-            
+
             currentSelectedSlot = null;
             PieceSelectionManager.Instance.DeselectPiece();
         }
