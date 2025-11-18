@@ -48,11 +48,11 @@ namespace UI.Main
 
         private void Start()
         {
+            buttonSlots.Clear();
+            currentSelectedSlot = null;
+
             pieceUsageList = StageManager.Instance.currentStageInstance.pieceUsageList;
-
             GenerateButtonsFromUsageList(pieceUsageList);
-
-  
 
             GameEventBus.OnPiecePlaced += OnPieceUsed;
         }
@@ -137,7 +137,7 @@ namespace UI.Main
             {
                 if (slot.button == null) continue;                // null 保護
                 if (slot.button.Equals(null)) continue;          // Unity Destroy 保護 (必加)
-                
+
                 var colors = slot.button.colors;
                 colors.normalColor = (slot == currentSelectedSlot) ? Color.green : Color.white;
                 slot.button.colors = colors;
@@ -156,17 +156,14 @@ namespace UI.Main
             if (currentSelectedSlot == null) return;
             if (currentSelectedSlot.config != piece.Config) return;
 
-            // 1. 拿出按鈕引用
             var btn = currentSelectedSlot.button;
 
-            // 2. 從列表移除
+            // 從列表移除該 slot
             buttonSlots.Remove(currentSelectedSlot);
 
-            // 3.馬上清空引用，避免後面被 iterate
-            currentSelectedSlot.button = null;
-
-            // 4. Destroy 按鈕
-            Destroy(btn.gameObject);
+            // Destroy 按鈕（此時 btn 不會是 null）
+            if (btn != null)
+                Destroy(btn.gameObject);
 
             currentSelectedSlot = null;
             PieceSelectionManager.Instance.DeselectPiece();
