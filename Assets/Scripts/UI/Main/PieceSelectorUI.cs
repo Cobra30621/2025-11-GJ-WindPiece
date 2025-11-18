@@ -153,10 +153,18 @@ namespace UI.Main
             if (currentSelectedSlot == null) return;
             if (currentSelectedSlot.config != piece.Config) return;
 
-            // 移除使用掉的按鈕
-            buttonSlots.Remove(currentSelectedSlot);
-            Destroy(currentSelectedSlot.button.gameObject);
+            // 1. 拿出按鈕引用
+            var btn = currentSelectedSlot.button;
 
+            // 2. 從列表移除
+            buttonSlots.Remove(currentSelectedSlot);
+
+            // 3.馬上清空引用，避免後面被 iterate
+            currentSelectedSlot.button = null;
+
+            // 4. Destroy 按鈕
+            Destroy(btn.gameObject);
+            
             currentSelectedSlot = null;
             PieceSelectionManager.Instance.DeselectPiece();
         }
